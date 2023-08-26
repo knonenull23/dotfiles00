@@ -7,13 +7,28 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set number
 set mouse=a
 set noswapfile
 set backupdir=~/.cache/vim
 set ttyfast
 set wildmode=longest,list
+set clipboard+=unnamedplus
 filetype plugin on
+
+" guard for distributions lacking the 'persistent_undo' feature.
+if has('persistent_undo')
+    " define a path to store persistent undo files.
+    let target_path = expand('~/.config/vim-persisted-undo/')
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call system('mkdir -p ' . target_path)
+    endif
+    " point Vim to the defined undo directory.
+    let &undodir = target_path
+    " finally, enable undo persistence.
+    set undofile
+endif
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -31,18 +46,19 @@ call plug#begin()
 call plug#end()
 
 colorscheme dracula
-syntax enable
+syntax on
 
 let mapleader="\\"
 nnoremap <Leader>ve :e $MYVIMRC<CR>
 nnoremap <Leader>vr :source $MYVIMRC<CR>
-nnoremap <Leader>q :NERDTreeToggle<CR>
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fc :Commits<CR>
 nnoremap <Leader>fg :Rg
 nnoremap <Leader>fG :RG
 nnoremap <Leader>ft :Tags
 
+nnoremap <Leader><Leader> :set number! \| :noh<CR>
+nnoremap <Leader>q :NERDTreeToggle<CR>
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <A-j> <C-W>j
 nnoremap <A-k> <C-W>k
