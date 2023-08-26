@@ -63,32 +63,33 @@ call plug#end()
 colorscheme dracula
 syntax on
 
-let mapleader="\\"
-nnoremap <Leader>ve :e $MYVIMRC<CR>
-nnoremap <Leader>vr :source $MYVIMRC<CR>
-nnoremap <Leader>ff :Files<CR>
-nnoremap <Leader>fc :Commits<CR>
-nnoremap <Leader>fg :Rg
-nnoremap <Leader>fG :RG
-nnoremap <Leader>ft :Tags
+nnoremap <A-v>e :e $MYVIMRC<CR>
+nnoremap <A-v>r :source $MYVIMRC<CR>
+nnoremap <A-f>f :Files<CR>
+nnoremap <A-f>c :Commits<CR>
+nnoremap <A-f>g :Rg 
+nnoremap <A-f>G :RG 
+nnoremap <A-f>t :Tags
 
-nnoremap <Leader><Leader> :set number! \| :noh \| :call ToggleSignColumn()<CR>
-nnoremap <Leader>q :NERDTreeToggle<CR>
-nnoremap <Leader>t :tabnew<CR>
+nnoremap <A-space> :set number! \| :noh \| :call ToggleSignColumn()<CR>
+nnoremap <A-q> :NERDTreeToggle<CR>
+nnoremap <A-t> :tabnew<CR>
+nnoremap <A-T> :terminal<CR>
+nnoremap <A-w> :q!<CR>
 nnoremap <A-j> <C-W>j
 nnoremap <A-k> <C-W>k
 nnoremap <A-h> <C-W>h
 nnoremap <A-l> <C-W>l
-noremap <Leader>1 1gt
-noremap <Leader>2 2gt
-noremap <Leader>3 3gt
-noremap <Leader>4 4gt
-noremap <Leader>5 5gt
-noremap <Leader>6 6gt
-noremap <Leader>7 7gt
-noremap <Leader>8 8gt
-noremap <Leader>9 9gt
-noremap <Leader>0 :tablast<cr>
+noremap <A-1> 1gt
+noremap <A-2> 2gt
+noremap <A-3> 3gt
+noremap <A-4> 4gt
+noremap <A-5> 5gt
+noremap <A-6> 6gt
+noremap <A-7> 7gt
+noremap <A-8> 8gt
+noremap <A-9> 9gt
+noremap <A-0> :tablast<cr>
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
