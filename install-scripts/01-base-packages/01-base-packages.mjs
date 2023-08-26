@@ -1,5 +1,5 @@
 #!/usr/bin/env zx
 
 await $`apt update`
-await $`apt install git ripgrep neovim -y`
+await $`apt install git curl wget -y`
 console.log(chalk.green("Done."))

@@ -1,5 +1,8 @@
 #!/usr/bin/env zx
 
+await $`apt update`
+await $`apt install ripgrep neovim -y`
+
 const homeDir = os.homedir()
 
 console.log(chalk.blue(`Copying init.vim to ${homeDir}/.config/nvim/init.vim`))
