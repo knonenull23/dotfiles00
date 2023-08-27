@@ -60,6 +60,7 @@ call plug#begin()
  Plug 'tpope/vim-commentary'
 call plug#end()
 
+let g:dracula_italic = 0
 colorscheme dracula
 syntax on
 
