@@ -92,6 +92,8 @@ noremap <A-8> 8gt
 noremap <A-9> 9gt
 noremap <A-0> :tablast<CR>
 nnoremap <A-z> :Format<CR>
+nnoremap <A-/> :Commentary<CR>
+vnoremap <A-/> :Commentary<CR>
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
