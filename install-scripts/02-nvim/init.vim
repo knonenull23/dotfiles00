@@ -92,6 +92,16 @@ noremap <A-7> 7gt
 noremap <A-8> 8gt
 noremap <A-9> 9gt
 noremap <A-0> :tablast<CR>
+tnoremap <A-1> <C-\><C-n>1gt
+tnoremap <A-2> <C-\><C-n>2gt
+tnoremap <A-3> <C-\><C-n>3gt
+tnoremap <A-4> <C-\><C-n>4gt
+tnoremap <A-5> <C-\><C-n>5gt
+tnoremap <A-6> <C-\><C-n>6gt
+tnoremap <A-7> <C-\><C-n>7gt
+tnoremap <A-8> <C-\><C-n>8gt
+tnoremap <A-9> <C-\><C-n>9gt
+tnoremap <A-0> <C-\><C-n>:tablast<CR>
 nnoremap <A-z> :Format<CR>
 nnoremap <A-/> :Commentary<CR>
 vnoremap <A-/> :Commentary<CR>
