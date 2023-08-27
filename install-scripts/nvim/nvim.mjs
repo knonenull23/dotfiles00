@@ -1,8 +1,12 @@
 #!/usr/bin/env zx
 
-await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
-await $`chmod u+x nvim.appimage`
-await $`sudo mv nvim.appimage /usr/bin/nvim`
+if (os.arch() == 'arm64') {
+    await $`pkg install neovim`
+} else {
+    await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
+    await $`chmod u+x nvim.appimage`
+    await $`sudo mv nvim.appimage /usr/bin/nvim`
+}
 
 const homeDir = os.homedir()
 await $`mkdir -p ${homeDir}/.config/nvim`
