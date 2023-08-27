@@ -1,7 +1,8 @@
 #!/usr/bin/env zx
 
-// await $`sudo apt update`
-// await $`sudo apt install ripgrep neovim -y`
+await $`sudo apt update`
+await $`sudo apt install ripgrep neovim -y`
+await $`sudo apt remove vim -y`
 
 const homeDir = os.homedir()
 await $`mkdir -p ${homeDir}/.config/nvim`
