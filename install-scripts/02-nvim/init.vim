@@ -76,7 +76,7 @@ nnoremap <A-space> :set number! \| :noh \| :call ToggleSignColumn()<CR>
 nnoremap <A-q> :NERDTreeToggle<CR>
 nnoremap <A-t> :tabnew<CR>
 nnoremap <A-T> :terminal<CR>
-tnoremap <C-c> <C-\><C-n>
+tnoremap <C-d> <C-\><C-n>
 nnoremap <A-w> :q!<CR>
 nnoremap <A-j> <C-W>j
 nnoremap <A-k> <C-W>k
