@@ -1,2 +1,2 @@
 sudo apt update && \
-sudo apt install git curl wget gh -y
+sudo apt install git curl wget gh libfuse-dev ripgrep -y
