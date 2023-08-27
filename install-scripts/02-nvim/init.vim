@@ -91,6 +91,8 @@ noremap <A-6> 6gt
 noremap <A-7> 7gt
 noremap <A-8> 8gt
 noremap <A-9> 9gt
+noremap <A-<> :tabm -1<CR>
+noremap <A->> :tabm +1<CR>
 noremap <A-0> :tablast<CR>
 tnoremap <A-1> <C-\><C-n>1gt
 tnoremap <A-2> <C-\><C-n>2gt
