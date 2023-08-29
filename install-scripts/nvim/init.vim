@@ -117,7 +117,7 @@ vnoremap <A-/> :Commentary<CR>
 lua << EOF
   require('mason').setup()
   require('mason-lspconfig').setup {
-          ensure_installed = { 'jdtls', 'pyright', 'jsonls', 'yamlls', 'tsserver', 'bashls' }
+          ensure_installed = { 'jdtls', 'pyright', 'jsonls', 'yamlls', 'tsserver', 'bashls', 'powershell_es' }
       }
   require('lspconfig').jdtls.setup {}
   require('lspconfig').pyright.setup {}
@@ -125,6 +125,7 @@ lua << EOF
   require('lspconfig').jsonls.setup {}
   require('lspconfig').tsserver.setup {}
   require('lspconfig').bashls.setup {}
+  require('lspconfig').powershell_es.setup {}
   
   -- Global mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
