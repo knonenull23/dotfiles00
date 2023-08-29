@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
 if (os.arch() == 'arm64') {
-    await $`pkg install neovim`
+    await $`pkg install neovim`.nothrow()
 } else {
     await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
     await $`chmod u+x nvim.appimage`
