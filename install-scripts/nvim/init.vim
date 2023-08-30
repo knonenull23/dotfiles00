@@ -111,7 +111,7 @@ tnoremap <A-7> <C-\><C-n>7gt
 tnoremap <A-8> <C-\><C-n>8gt
 tnoremap <A-9> <C-\><C-n>9gt
 tnoremap <A-0> <C-\><C-n>:tablast<CR>
-nnoremap <A-/> :Commentary<kR>
+nnoremap <A-/> :Commentary<CR>
 vnoremap <A-/> :Commentary<CR>
 
 lua << EOF
