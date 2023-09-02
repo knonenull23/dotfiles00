@@ -53,8 +53,8 @@ endif
 call plug#begin()
  Plug 'dracula/vim'
  Plug 'preservim/nerdtree'
- Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
- Plug 'junegunn/fzf.vim'
+ Plug 'nvim-lua/plenary.nvim'
+ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-commentary'
  Plug 'williamboman/mason.nvim'
@@ -65,6 +65,7 @@ call plug#begin()
  Plug 'hrsh7th/cmp-path'
  Plug 'hrsh7th/cmp-cmdline'
  Plug 'hrsh7th/nvim-cmp'
+ Plug 'stevearc/oil.nvim'
 call plug#end()
 
 let g:dracula_italic = 0
@@ -73,11 +74,11 @@ syntax on
 
 nnoremap <A-v>e :e $MYVIMRC<CR>
 nnoremap <A-v>r :source $MYVIMRC<CR>
-nnoremap <A-f>f :Files<CR>
-nnoremap <A-f>c :Commits<CR>
-nnoremap <A-f>g :Rg 
-nnoremap <A-f>G :RG 
-nnoremap <A-f>t :Tags
+
+nnoremap <A-f>f <cmd>Telescope find_files<CR>
+nnoremap <A-f>g <cmd>Telescope live_grep<CR>
+nnoremap <A-f>b <cmd>Telescope buffers<CR>
+nnoremap <A-f>h <cmd>Telescope help_tags<CR>
 
 nnoremap <A-space> :set number! \| :noh \| :call ToggleSignColumn()<CR>
 nnoremap <A-q> :NERDTreeToggle<CR>
@@ -125,6 +126,7 @@ lua << EOF
   require('lspconfig').jsonls.setup {}
   require('lspconfig').tsserver.setup {}
   require('lspconfig').bashls.setup {}
+  require("oil").setup()
   
   -- Global mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
