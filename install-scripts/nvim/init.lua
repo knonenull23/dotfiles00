@@ -529,6 +529,16 @@ cmp.setup {
 }
 
 -- Personal Keybindings
+function ToggleSideBar()
+  if vim.wo.number == true then
+    vim.wo.number = false
+    vim.opt.scl = 'no'
+  else
+    vim.wo.number = true
+    vim.opt.scl = 'yes'
+  end
+end
+
 require("telescope").load_extension "file_browser"
 require("oil").setup()
 vim.keymap.set('n', '<A-v>e', '<Esc><cmd>e $MYVIMRC<CR>', {})
@@ -545,6 +555,7 @@ vim.keymap.set('n', '<A-q>', '<cmd>Telescope file_browser<CR>', {})
 vim.keymap.set('n', '<A-e>', '<cmd>Telescope resume<CR>', {})
 vim.keymap.set('n', '<A-b>', '<cmd>Git blame<CR>', {})
 vim.keymap.set('n', '<A-f>', '<cmd>Format<CR>', {})
+vim.keymap.set('n', '<A-z>', '<cmd>lua ToggleSideBar()<CR>', {})
 
 vim.keymap.set('n', '<A-1>', '1gt', {})
 vim.keymap.set('n', '<A-2>', '2gt', {})
