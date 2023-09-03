@@ -1,20 +1,15 @@
 #!/usr/bin/env zx
 
-if (os.arch() == 'arm64') {
-    await $`pkg install neovim`.nothrow()
-} else {
-    await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
-    await $`chmod u+x nvim.appimage`
-    await $`sudo mv nvim.appimage /usr/bin/nvim`
-}
+await $`sudo pacman -Syu neovim ripgrep`
 
 const homeDir = os.homedir()
 await $`mkdir -p ${homeDir}/.config/nvim`
 
-console.log(chalk.blue(`Symlink ${__dirname}/init.vim to ${homeDir}/.config/nvim/init.vim`))
+console.log(chalk.blue(`Symlink ${__dirname}/lua and ${__dirname}/init.lua to ${homeDir}/.config/nvim`))
 const ok = await question(`Ok? (y/n [n]) `)
 
 if (ok.toLowerCase().startsWith("y")) {
-    await $`ln -s  ${__dirname}/init.vim ${homeDir}/.config/nvim/init.vim`
+    await $`ln -s  ${__dirname}/lua ${homeDir}/.config/nvim/`
+    await $`ln -s  ${__dirname}/init.lua ${homeDir}/.config/nvim/`
 }
 
