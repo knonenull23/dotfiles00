@@ -54,7 +54,27 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
-    vim.keymap.set('n', '<F8>', require('jdtls.dap').setup_dap_main_class_configs, { desc = 'Activate Java DAP' })
+    vim.keymap.set('n', '<F8>', function()
+      local HOME = os.getenv "HOME"
+      local NVIM_HOME = HOME .. "/.local/share/nvim"
+      local bundles = {
+        vim.fn.glob(
+          NVIM_HOME .. "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+        ),
+      }
+      vim.list_extend(bundles, vim.split(vim.fn.glob(NVIM_HOME .. "/vscode-java-test/server/*.jar"), "\n"))
+
+      require('dap-python').setup(HOME .. '/.virtualenvs/debugpy/bin/python')
+      require('jdtls').start_or_attach({
+        cmd = { NVIM_HOME .. '/mason/bin/jdtls' },
+        root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+        init_options = {
+          bundles = bundles
+        },
+      })
+      require('jdtls.dap').setup_dap_main_class_configs()
+      require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+    end, { desc = 'Activate Java DAP' })
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -84,25 +104,5 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
-
-    local HOME = os.getenv "HOME"
-    local NVIM_HOME = HOME .. "/.local/share/nvim"
-    local bundles = {
-      vim.fn.glob(
-        NVIM_HOME .. "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
-      ),
-    }
-    vim.list_extend(bundles, vim.split(vim.fn.glob(NVIM_HOME .. "/vscode-java-test/server/*.jar"), "\n"))
-
-    require('dap-python').setup(HOME .. '/.virtualenvs/debugpy/bin/python')
-    require('jdtls').start_or_attach({
-      cmd = { NVIM_HOME .. '/mason/bin/jdtls' },
-      root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
-      init_options = {
-        bundles = bundles
-      },
-    })
-
-    require('jdtls').setup_dap({ hotcodereplace = 'auto' })
   end,
 }
