@@ -12,4 +12,3 @@ if (ok.toLowerCase().startsWith("y")) {
     await $`ln -s  ${__dirname}/lua ${homeDir}/.config/nvim/`
     await $`ln -s  ${__dirname}/init.lua ${homeDir}/.config/nvim/`
 }
-
