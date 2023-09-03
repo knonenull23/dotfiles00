@@ -66,6 +66,8 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  -- Filesystem editing
+  'stevearc/oil.nvim',
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -92,7 +94,10 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -524,6 +529,8 @@ cmp.setup {
 }
 
 -- Personal Keybindings
+require("telescope").load_extension "file_browser"
+require("oil").setup()
 vim.keymap.set('n', '<A-v>e', '<Esc><cmd>e $MYVIMRC<CR>', {})
 vim.keymap.set('n', '<A-v>r', '<Esc><cmd>source $MYVIMRC<CR>', { silent = true })
 vim.keymap.set('n', '<A-t>', '<Esc><cmd>tabnew<CR>', {})
@@ -534,6 +541,10 @@ vim.keymap.set('n', '<A-j>', '<C-W>j', {})
 vim.keymap.set('n', '<A-k>', '<C-W>k', {})
 vim.keymap.set('n', '<A-h>', '<C-W>h', {})
 vim.keymap.set('n', '<A-l>', '<C-W>l', {})
+vim.keymap.set('n', '<A-q>', '<cmd>Telescope file_browser<CR>', {})
+vim.keymap.set('n', '<A-e>', '<cmd>Telescope resume<CR>', {})
+vim.keymap.set('n', '<A-b>', '<cmd>Git blame<CR>', {})
+vim.keymap.set('n', '<A-f>', '<cmd>Format<CR>', {})
 
 vim.keymap.set('n', '<A-1>', '1gt', {})
 vim.keymap.set('n', '<A-2>', '2gt', {})
