@@ -24,8 +24,8 @@ return {
       vim.keymap.set('n', '<A-k>', '<C-W>k', {})
       vim.keymap.set('n', '<A-h>', '<C-W>h', {})
       vim.keymap.set('n', '<A-l>', '<C-W>l', {})
-      vim.keymap.set('n', '<A-q>', '<cmd>Telescope file_browser<CR>', {})
-      vim.keymap.set('n', '<A-e>', '<cmd>Telescope resume<CR>', {})
+      vim.keymap.set('n', '<A-e>', '<cmd>Telescope file_browser<CR>', {})
+      vim.keymap.set('n', '<A-E>', '<cmd>Telescope resume<CR>', {})
       vim.keymap.set('n', '<A-b>', '<cmd>Git blame<CR>', {})
       vim.keymap.set('n', '<A-f>', '<cmd>Format<CR>', {})
       vim.keymap.set('n', '<A-z>', '<cmd>lua ToggleSideBar()<CR>', {})
@@ -56,6 +56,16 @@ return {
     'stevearc/oil.nvim',
     config = function()
       require('oil').setup()
+    end
+  },
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      vim.opt.termguicolors = true
+      vim.keymap.set('n', '<A-q>', '<cmd>NvimTreeToggle<CR>', {})
+      require("nvim-tree").setup()
     end
   }
 }
