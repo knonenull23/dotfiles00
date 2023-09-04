@@ -85,8 +85,8 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    local HOME = os.getenv "HOME"
-    local NVIM_HOME = HOME .. "/.local/share/nvim"
+    local HOME = vim.env.HOME
+    local NVIM_HOME = vim.fn.stdpath('data')
     local bundles = {
       vim.fn.glob(
         NVIM_HOME .. "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
