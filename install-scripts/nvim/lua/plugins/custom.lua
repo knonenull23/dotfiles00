@@ -1,7 +1,7 @@
 -- custom keybindings and  added plugins
 return {
   {
-    'nvim-telescope/telescope-file-browser.nvim',
+    'nvim-tree/nvim-tree.lua',
     config = function()
       function ToggleSideBar()
         if vim.wo.number == true then
@@ -13,7 +13,6 @@ return {
         end
       end
 
-      require('telescope').load_extension 'file_browser'
       vim.keymap.set('n', '<A-v>e', '<Esc><cmd>e $MYVIMRC<CR>', {})
       vim.keymap.set('n', '<A-v>r', '<Esc><cmd>source $MYVIMRC<CR>', { silent = true })
       vim.keymap.set('n', '<A-t>', '<Esc><cmd>tabnew<CR>', {})
@@ -24,8 +23,6 @@ return {
       vim.keymap.set('n', '<A-k>', '<C-W>k', {})
       vim.keymap.set('n', '<A-h>', '<C-W>h', {})
       vim.keymap.set('n', '<A-l>', '<C-W>l', {})
-      vim.keymap.set('n', '<A-e>', '<cmd>Telescope file_browser<CR>', {})
-      vim.keymap.set('n', '<A-E>', '<cmd>Telescope resume<CR>', {})
       vim.keymap.set('n', '<A-b>', '<cmd>Git blame<CR>', {})
       vim.keymap.set('n', '<A-f>', '<cmd>Format<CR>', {})
       vim.keymap.set('n', '<A-z>', '<cmd>lua ToggleSideBar()<CR>', {})
@@ -50,6 +47,19 @@ return {
       vim.keymap.set('t', '<A-7>', '<C-\\><C-n>7gt', {})
       vim.keymap.set('t', '<A-8>', '<C-\\><C-n>8gt', {})
       vim.keymap.set('t', '<A-9>', '<C-\\><C-n>9gt', {})
+
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      vim.opt.termguicolors = true
+      vim.keymap.set('n', '<A-q>', '<cmd>NvimTreeToggle<CR>', {})
+      require('nvim-tree').setup()
+      require('mason-lspconfig').setup(
+        {
+          ensure_installed = {
+            jdtls = {}
+          }
+        }
+      )
     end
   },
   {
@@ -58,14 +68,4 @@ return {
       require('oil').setup()
     end
   },
-  {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      vim.opt.termguicolors = true
-      vim.keymap.set('n', '<A-q>', '<cmd>NvimTreeToggle<CR>', {})
-      require("nvim-tree").setup()
-    end
-  }
 }
