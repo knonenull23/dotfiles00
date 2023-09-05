@@ -13,6 +13,7 @@ return {
         end
       end
 
+      require('nvim-tree').setup()
       vim.keymap.set('n', '<A-v>e', '<Esc><cmd>e $MYVIMRC<CR>', {})
       vim.keymap.set('n', '<A-v>r', '<Esc><cmd>source $MYVIMRC<CR>', { silent = true })
       vim.keymap.set('n', '<A-t>', '<Esc><cmd>tabnew<CR>', {})
@@ -47,19 +48,11 @@ return {
       vim.keymap.set('t', '<A-7>', '<C-\\><C-n>7gt', {})
       vim.keymap.set('t', '<A-8>', '<C-\\><C-n>8gt', {})
       vim.keymap.set('t', '<A-9>', '<C-\\><C-n>9gt', {})
+      vim.keymap.set('n', '<A-q>', '<cmd>NvimTreeToggle<CR>', {})
 
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
       vim.opt.termguicolors = true
-      vim.keymap.set('n', '<A-q>', '<cmd>NvimTreeToggle<CR>', {})
-      require('nvim-tree').setup()
-      require('mason-lspconfig').setup(
-        {
-          ensure_installed = {
-            jdtls = {}
-          }
-        }
-      )
     end
   },
   {

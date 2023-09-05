@@ -6,6 +6,10 @@ return {
       'williamboman/mason-lspconfig.nvim',
     },
     config = function()
+      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+      vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+      vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+      vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
       local on_attach = function(_, bufnr)
         local nmap = function(keys, func, desc)
@@ -40,7 +44,14 @@ return {
       local servers = {
         pyright = {},
         jdtls = {},
-        yamlls = {},
+        yamlls = {
+          yaml = {
+            schemas = {
+              kubernetes = "*.k8s.yaml",
+              ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] = "*.cf.yaml"
+            }
+          }
+        },
         tsserver = {},
         lua_ls = {
           Lua = {
@@ -76,14 +87,38 @@ return {
   },
 
   {
+    'rafamadriz/friendly-snippets',
+  },
+
+  {
+    'L3MON4D3/LuaSnip',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+    },
+    config = function()
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end
+  },
+
+  {
     'hrsh7th/nvim-cmp',
     dependencies = {
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
+      'rafamadriz/friendly-snippets',
     },
     config = function()
       local cmp = require 'cmp'
+      local luasnip = require 'luasnip'
+      luasnip.config.setup {}
 
       cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -97,6 +132,8 @@ return {
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
             else
               fallback()
             end
@@ -104,6 +141,8 @@ return {
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
@@ -111,6 +150,7 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
+          { name = 'luasnip' },
         },
       }
     end
