@@ -101,7 +101,7 @@ return {
         },
       })
       require('jdtls').setup_dap({ hotcodereplace = 'auto' })
-      vim.defer_fn(function() require('jdtls.dap').setup_dap_main_class_configs() end, 5000)
+      vim.defer_fn(function() require('jdtls.dap').setup_dap_main_class_configs() end, 8000)
       async_load_dap:close()
     end))
     async_load_dap:send()
