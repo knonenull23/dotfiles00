@@ -1,7 +1,7 @@
 return {
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
-  { 
+  {
     'tpope/vim-fugitive',
     config = function()
       vim.keymap.set("n", '=', '<CMD>G<CR>', { desc = "Git" })
@@ -46,7 +46,17 @@ return {
     config = function()
       require('oil').setup()
       vim.keymap.set("n", '-', '<CMD>Oil --float ' .. vim.fn.expand('%') .. '<CR>', { desc = "Open parent directory" })
-      vim.keymap.set("n", '<leader>-', '<CMD>Oil --float ' .. vim.fn.stdpath('config') .. '<CR>', { desc = "Edit configuration folder" })
+      vim.keymap.set("n", '<leader>-', '<CMD>Oil --float ' .. vim.fn.stdpath('config') .. '<CR>',
+        { desc = "Edit configuration folder" })
     end
   },
+
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+      require('toggleterm').setup()
+      vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
+    end
+  }
 }
