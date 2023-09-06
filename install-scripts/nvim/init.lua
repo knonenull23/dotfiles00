@@ -20,7 +20,7 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.treesitter',
   require 'plugins.debug',
-  require 'plugins.custom'
+  require 'plugins.nvim-tree'
 }, {})
 
 vim.cmd [[colorscheme tokyonight]]
@@ -37,3 +37,4 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
+

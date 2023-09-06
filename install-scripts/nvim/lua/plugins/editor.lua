@@ -1,7 +1,12 @@
 return {
-  'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
+  { 
+    'tpope/vim-fugitive',
+    config = function()
+      vim.keymap.set("n", '=', '<CMD>G<CR>', { desc = "Git" })
+    end
+  },
   {
     'numToStr/Comment.nvim',
     config = function()
@@ -33,5 +38,14 @@ return {
         section_separators = '',
       },
     },
+  },
+
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require('oil').setup()
+      vim.keymap.set("n", '-', '<CMD>Oil --float ' .. vim.fn.expand('%') .. '<CR>', { desc = "Open parent directory" })
+      vim.keymap.set("n", '<leader>-', '<CMD>Oil --float ' .. vim.fn.stdpath('config') .. '<CR>', { desc = "Edit configuration folder" })
+    end
   },
 }

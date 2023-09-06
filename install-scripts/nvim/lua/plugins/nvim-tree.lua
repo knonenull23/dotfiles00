@@ -14,8 +14,6 @@ return {
       end
 
       require('nvim-tree').setup()
-      vim.keymap.set('n', '<A-v>e', '<Esc><cmd>e $MYVIMRC<CR>', {})
-      vim.keymap.set('n', '<A-v>r', '<Esc><cmd>source $MYVIMRC<CR>', { silent = true })
       vim.keymap.set('n', '<A-t>', '<Esc><cmd>tabnew<CR>', {})
       vim.keymap.set('n', '<A-T>', '<Esc><cmd>terminal<CR>', {})
       vim.keymap.set('n', '<A-w>', '<Esc><cmd>q!<CR>', {})
@@ -49,16 +47,11 @@ return {
       vim.keymap.set('t', '<A-8>', '<C-\\><C-n>8gt', {})
       vim.keymap.set('t', '<A-9>', '<C-\\><C-n>9gt', {})
       vim.keymap.set('n', '<A-q>', '<cmd>NvimTreeToggle<CR>', {})
+      vim.keymap.set('n', '<A-Q>', '<cmd>NvimTreeFindFile<CR>', {})
 
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
       vim.opt.termguicolors = true
     end
-  },
-  {
-    'stevearc/oil.nvim',
-    config = function()
-      require('oil').setup()
-    end
-  },
+  }
 }
