@@ -1,6 +1,6 @@
 #!/usr/bin/env zx
 
-await $`sudo pacman -Syu neovim ripgrep`
+await $`sudo pacman -Syu neovim ripgrep cmake`
 
 const homeDir = os.homedir()
 await $`mkdir -p ${homeDir}/.config/nvim`
