@@ -6,7 +6,6 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
     'mfussenegger/nvim-dap-python',
     'mfussenegger/nvim-jdtls',
-    'leoluz/nvim-dap-go'
   },
   config = function()
     local dap = require 'dap'
@@ -36,21 +35,17 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
     vim.keymap.set('n', '<F12>', function()
       require('dap-python').setup()
-      require('dap-go').setup {
-        dap_configurations = {
-          {
-            type = "go",
-            name = "Attach Remote",
-            mode = "remote",
-            request = "attach",
-            connection = {
-              host = "127.0.0.1",
-              port = "43000"
-            }
-          }
-        },
-        delve = {
-          port = "43000"
+      require('dap').adapters.delve = {
+        type = 'server',
+        port = '43000',
+        host = '127.0.0.1'
+      }
+      require('dap').configurations.go = {
+        {
+          type = "delve",
+          name = "debug",
+          request = "launch",
+          program = "${file}"
         }
       }
       Async_load_dap = vim.loop.new_async(vim.schedule_wrap(function()
