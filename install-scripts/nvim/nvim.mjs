@@ -1,6 +1,7 @@
 #!/usr/bin/env zx
 
 await $`sudo pacman -Syu neovim ripgrep cmake`
+await $`python3 -m pip install debugpy --break-system-packages`
 
 const homeDir = os.homedir()
 await $`mkdir -p ${homeDir}/.config/nvim`

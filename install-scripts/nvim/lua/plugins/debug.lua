@@ -36,7 +36,23 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
     vim.keymap.set('n', '<F12>', function()
       require('dap-python').setup()
-      require('dap-go').setup()
+      require('dap-go').setup {
+        dap_configurations = {
+          {
+            type = "go",
+            name = "Attach Remote",
+            mode = "remote",
+            request = "attach",
+            connection = {
+              host = "127.0.0.1",
+              port = "43000"
+            }
+          }
+        },
+        delve = {
+          port = "43000"
+        }
+      }
       Async_load_dap = vim.loop.new_async(vim.schedule_wrap(function()
         local bundles = {
           vim.fn.glob(
