@@ -35,19 +35,24 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
     vim.keymap.set('n', '<F12>', function()
       require('dap-python').setup()
-      require('dap').adapters.delve = {
-        type = 'server',
-        port = '43000',
-        host = '127.0.0.1'
-      }
-      require('dap').configurations.go = {
-        {
-          type = "delve",
-          name = "debug",
-          request = "launch",
-          program = "${file}"
+
+      if vim.fn.filereadable(vim.fn.stdpath('data') .. '/mason/bin/dlv') then
+        require('dap').adapters.delve = {
+          type = 'server',
+          port = '43000',
+          executable = {
+            command = 'dlv',
+            args = { 'dap', '-l', '127.0.0.1:43000' },
+          }
         }
-      }
+      else
+        require('dap').adapters.delve = {
+          type = 'server',
+          port = '43000',
+          host = '127.0.0.1'
+        }
+      end
+
       Async_load_dap = vim.loop.new_async(vim.schedule_wrap(function()
         local bundles = {
           vim.fn.glob(
