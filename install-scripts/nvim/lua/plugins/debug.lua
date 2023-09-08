@@ -35,7 +35,7 @@ return {
     end, { desc = 'Debug: Set Breakpoint' })
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
     vim.keymap.set('n', '<F12>', function()
-      require('dap-python').setup(vim.env.HOME .. '/.virtualenvs/debugpy/bin/python')
+      require('dap-python').setup()
       require('dap-go').setup()
       Async_load_dap = vim.loop.new_async(vim.schedule_wrap(function()
         local bundles = {
