@@ -44,6 +44,8 @@ return {
       local servers = {
         pyright = {},
         jdtls = {},
+        bashls = {},
+        gopls = {},
         yamlls = {
           yaml = {
             schemas = {

@@ -5,7 +5,8 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
     'mfussenegger/nvim-dap-python',
-    'mfussenegger/nvim-jdtls'
+    'mfussenegger/nvim-jdtls',
+    'leoluz/nvim-dap-go'
   },
   config = function()
     local dap = require 'dap'
@@ -14,6 +15,14 @@ return {
     require('mason-nvim-dap').setup {
       automatic_setup = false,
       handlers = {},
+      ensure_installed = {
+        'javadbg',
+        'js',
+        'python',
+        'bash',
+        'chrome',
+        'delve'
+      }
     }
 
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
@@ -27,7 +36,8 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
     vim.keymap.set('n', '<F12>', function()
       require('dap-python').setup(vim.env.HOME .. '/.virtualenvs/debugpy/bin/python')
-      async_load_dap = vim.loop.new_async(vim.schedule_wrap(function()
+      require('dap-go').setup()
+      Async_load_dap = vim.loop.new_async(vim.schedule_wrap(function()
         local bundles = {
           vim.fn.glob(
             vim.fn.stdpath('data') ..
@@ -37,7 +47,7 @@ return {
         vim.list_extend(bundles, vim.split(vim.fn.glob(vim.fn.stdpath('data') .. "/vscode-java-test/server/*.jar"), "\n"))
 
         require('jdtls').start_or_attach({
-          cmd = { vim.fn.stdpath('data') .. '/mason/bin/jdtls' },
+          cmd = { 'jdtls' },
           root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
           init_options = {
             bundles = bundles
@@ -45,9 +55,9 @@ return {
         })
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
         vim.defer_fn(function() require('jdtls.dap').setup_dap_main_class_configs() end, 8000)
-        async_load_dap:close()
+        Async_load_dap:close()
       end))
-      async_load_dap:send()
+      Async_load_dap:send()
     end, { desc = 'Activate Debuggers' })
 
     dapui.setup {
