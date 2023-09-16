@@ -21,7 +21,7 @@ return {
       vim.keymap.set('n', '<A-t>', '<Esc><CMD>tabnew<CR>', {})
       vim.keymap.set('n', '<A-T>', '<Esc><CMD>terminal<CR>', {})
       vim.keymap.set('n', '<A-w>', '<Esc><CMD>q!<CR>', {})
-      vim.keymap.set('n', '<A-W>', '<C-w><C-o>', {})
+      vim.keymap.set('n', '<A-x>', '<Esc><C-w><C-o>', {})
       vim.keymap.set('t', '<C-d>', '<C-\\><C-n>', {})
       vim.keymap.set('n', '<A-j>', '<C-W>j', {})
       vim.keymap.set('n', '<A-k>', '<C-W>k', {})
