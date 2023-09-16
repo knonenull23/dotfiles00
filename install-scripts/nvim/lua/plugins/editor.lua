@@ -1,6 +1,5 @@
 return {
   'tpope/vim-rhubarb',
-  'tpope/vim-sleuth',
   {
     'tpope/vim-fugitive',
     config = function()
