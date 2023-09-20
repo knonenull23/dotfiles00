@@ -4,8 +4,8 @@ return {
     'tpope/vim-fugitive',
     config = function()
       vim.keymap.set("n", '=', '<CMD>G<CR>', { desc = "Git" })
-      vim.keymap.set('n', '<leader>=', '<CMD>Git log -p --follow %<CR>', {})
-      vim.keymap.set('n', '<leader>+', '<CMD>Git log --follow -- %<CR>', {})
+      vim.keymap.set('n', '<leader>g', '<CMD>Git log -p --follow %<CR>', {})
+      vim.keymap.set('n', '<leader>G', '<CMD>Git log --follow -- %<CR>', {})
     end
   },
   {
