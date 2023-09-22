@@ -10,6 +10,7 @@ return {
       vim.keymap.set('n', '<leader>gs', '<CMD>Gvdiffsplit<CR>', {})
       vim.keymap.set('n', '<leader>gb', '<CMD>Git blame<CR>', {})
       vim.keymap.set('n', '<leader>gp', '<CMD>Git push<CR>', {})
+      vim.keymap.set('n', '<leader>gx', '<CMD>Git remote prune origin<CR>', {})
     end
   },
   {
