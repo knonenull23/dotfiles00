@@ -1,3 +1,4 @@
+-- config folder: $HOME/.config/nvim
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -20,7 +21,8 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.treesitter',
   require 'plugins.debug',
-  require 'plugins.nvim-tree'
+  require 'plugins.nvim-tree',
+  require 'plugins.chatgpt'
 }, {})
 
 vim.cmd [[colorscheme tokyonight]]
