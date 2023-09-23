@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e 
 
 architecture=""
 case $(uname -m) in
