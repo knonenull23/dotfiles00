@@ -10,6 +10,7 @@ case $(uname -m) in
     aarch64)    dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;;
 esac
 
+mkdir -p "$HOME/.local"
 url=$(curl -s https://api.github.com/repos/cli/cli/releases/latest \
 | grep "browser_download_url.*tar.gz" \
 | cut -d : -f 2,3 \
