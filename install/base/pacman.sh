@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-pacman -Sy zip git wget jq python python-pip tmux base-devel neovim
+pacman -Sy zip git wget jq python python-pip tmux base-devel neovim ripgrep
 
 mkdir -p "$HOME/.local"
 
