@@ -3,10 +3,10 @@ set -e
 
 architecture=""
 case $(uname -m) in
-    i386)   architecture="386" ;;
-    i686)   architecture="386" ;;
-    x86_64) architecture="amd64" ;;
-    arm)    dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;;
+    i386)       architecture="386" ;;
+    i686)       architecture="386" ;;
+    x86_64)     architecture="amd64" ;;
+    arm)        dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;;
     aarch64)    dpkg --print-architecture | grep -q "[arm64 | aarch64]" && architecture="arm64" || architecture="arm" ;;
 esac
 
