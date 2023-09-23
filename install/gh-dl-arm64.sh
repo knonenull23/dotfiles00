@@ -7,5 +7,6 @@ get_latest_release()
 }
 
 mkdir -p /tmp/gh-dl && cd /tmp/gh-dl
+gh release download -R MordechaiHadad/bob -p "bob-linux-aarch64.zip"
 gh release download -R BurntSushi/ripgrep -p  "ripgrep-$(get_latest_release BurntSushi/ripgrep)-arm-unknown-linux-gnueabihf.tar.gz"
 cd - > /dev/null
