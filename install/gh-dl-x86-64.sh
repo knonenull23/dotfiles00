@@ -3,7 +3,7 @@ set -e
 
 get_latest_release()
 {
-  gh release list -R $1 -L 1 | cut -f2 -d' ' | sed 's/\s.*$//'
+  gh release list --exclude-pre-releases -R $1 -L 1 | cut -f2 -d' ' | sed 's/\s.*$//'
 }
 
 mkdir -p /tmp/gh-dl && cd /tmp/gh-dl
