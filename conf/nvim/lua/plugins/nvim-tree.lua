@@ -71,6 +71,7 @@ return {
             vim.keymap.set('t', '<A-9>', '<C-\\><C-n>9gt', {})
             vim.keymap.set('n', '<A-q>', '<CMD>NvimTreeToggle<CR>', {})
             vim.keymap.set('n', '<A-Q>', '<CMD>NvimTreeFindFile<CR>', {})
+            vim.keymap.set('i', '<C-f>', '<C-x><C-f>', {})
         end
     }
 }
