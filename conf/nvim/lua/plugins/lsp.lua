@@ -43,6 +43,7 @@ return {
             local mason_lspconfig = require 'mason-lspconfig'
             local servers = {
                 pyright = {},
+                lemminx = {},
                 jdtls = {},
                 bashls = {},
                 gopls = {},
