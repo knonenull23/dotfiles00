@@ -26,7 +26,7 @@ require('lazy').setup({
 }, {})
 
 vim.cmd [[colorscheme tokyonight]]
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 vim.wo.number = true
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
