@@ -43,11 +43,9 @@ return {
             local mason_lspconfig = require 'mason-lspconfig'
             local servers = {
                 pyright = {},
-                lemminx = {},
-                html = {},
                 jdtls = {},
-                bashls = {},
                 gopls = {},
+                tsserver = {},
                 yamlls = {
                     yaml = {
                         schemas = {
@@ -56,7 +54,6 @@ return {
                         }
                     }
                 },
-                tsserver = {},
                 lua_ls = {
                     Lua = {
                         workspace = { checkThirdParty = false },
