@@ -44,6 +44,7 @@ return {
             local servers = {
                 pyright = {},
                 lemminx = {},
+                html = {},
                 jdtls = {},
                 bashls = {},
                 gopls = {},
