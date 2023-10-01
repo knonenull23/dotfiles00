@@ -46,7 +46,7 @@ vim.o.termguicolors = true
 vim.opt.path = vim.opt.path + { vim.fn.stdpath('data') .. 'mason/bin' }
 vim.o.foldmethod = 'indent'
 vim.o.foldlevelstart = 99
-vim.o.foldnestmax=2;
+vim.o.foldnestmax = 2;
 
 function ToggleSideBar()
     if vim.wo.number == true then
@@ -58,8 +58,7 @@ function ToggleSideBar()
     end
 end
 
-vim.keymap.set("n", '<A-z>', 'za', { desc = "Fold" })
-vim.keymap.set("n", '<A-Z>', 'za', { desc = "Fold" })
+vim.keymap.set("n", '<leader>z', 'za', { desc = "Fold" })
 vim.keymap.set('n', '<A-n>', '<Esc><CMD>tabnew<CR>', {})
 vim.keymap.set('n', '<A-t>', '<Esc><CMD>terminal<CR>', {})
 vim.keymap.set('n', '<A-w>', '<Esc><CMD>q!<CR>', {})
