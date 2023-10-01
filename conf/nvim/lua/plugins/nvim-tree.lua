@@ -82,12 +82,13 @@ return {
         },
         config = function()
             require('aerial').setup({
+                open_automatic = true,
                 on_attach = function(bufnr)
                     -- Jump forwards/backwards with '{' and '}'
                     vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
                     vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
                 end,
-                default_direction = "prefer_right",
+                default_direction = "right",
                 vim.keymap.set('n', '<A-Q>', '<cmd>AerialToggle!<CR>')
             })
         end
