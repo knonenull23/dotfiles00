@@ -10,7 +10,8 @@ return {
             vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
             vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
             vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-            vim.keymap.set('n', '<leader>f', '<CMD>Format<CR>', {})
+            vim.keymap.set('n', '<leader>F', '<CMD>Format<CR>', {})
+            vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
             local on_attach = function(_, bufnr)
                 local nmap = function(keys, func, desc)
