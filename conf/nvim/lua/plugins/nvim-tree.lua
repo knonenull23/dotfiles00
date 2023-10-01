@@ -70,8 +70,26 @@ return {
             vim.keymap.set('t', '<A-8>', '<C-\\><C-n>8gt', {})
             vim.keymap.set('t', '<A-9>', '<C-\\><C-n>9gt', {})
             vim.keymap.set('n', '<A-q>', '<CMD>NvimTreeToggle<CR>', {})
-            vim.keymap.set('n', '<A-Q>', '<CMD>NvimTreeFindFile<CR>', {})
+            vim.keymap.set('n', '<A-S>', '<CMD>NvimTreeFindFile<CR>', {})
             vim.keymap.set('i', '<C-f>', '<C-x><C-f>', {})
+        end
+    },
+
+    {
+        'stevearc/aerial.nvim',
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require('aerial').setup({
+                on_attach = function(bufnr)
+                    -- Jump forwards/backwards with '{' and '}'
+                    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+                    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
+                end,
+                default_direction = "prefer_right",
+                vim.keymap.set('n', '<A-Q>', '<cmd>AerialToggle!<CR>')
+            })
         end
     }
 }
