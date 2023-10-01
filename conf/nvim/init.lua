@@ -58,7 +58,7 @@ function ToggleSideBar()
     end
 end
 
-vim.keymap.set("n", '<leader>z', 'za', { desc = "Fold" })
+vim.keymap.set("n", '<leader>a', 'za', { desc = "Fold" })
 vim.keymap.set('n', '<A-n>', '<Esc><CMD>tabnew<CR>', {})
 vim.keymap.set('n', '<A-t>', '<Esc><CMD>terminal<CR>', {})
 vim.keymap.set('n', '<A-w>', '<Esc><CMD>q!<CR>', {})
