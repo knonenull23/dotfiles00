@@ -11,7 +11,7 @@ return {
             vim.keymap.set('n', '<leader>gb', '<CMD>Git blame<CR>', {})
             vim.keymap.set('n', '<leader>gp', '<CMD>Git push<CR>', {})
             vim.keymap.set('n', '<leader>gx', '<CMD>Git remote prune origin<CR>', {})
-            vim.keymap.set('n', '<leader>gu', '<CMD>Git commit -am "update"<CR><CMD>Git push<CR>', {})
+            vim.keymap.set('n', '<leader>gu', '<CMD>Git commit -am "update";Git push<CR>', {})
         end
     },
     {
