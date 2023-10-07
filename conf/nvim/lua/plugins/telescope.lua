@@ -34,7 +34,7 @@ return {
                 { desc = '[?] Find recently opened files' })
             vim.keymap.set('n', '<leader>/', require('telescope.builtin').buffers,
                 { desc = '[ ] Find existing buffers' })
-            vim.keymap.set('n', '<A-space>', "<C-^><CR>",
+            vim.keymap.set('n', '<leader><leader>', "<C-^>",
                 { desc = 'Switch to previous buffer' })
 
             vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
