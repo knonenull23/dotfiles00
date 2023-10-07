@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-apt install zip curl git wget jq python3-pip python3-venv tmux build-essential ttyd -y
+apt install zip curl git delta wget jq python3-pip python3-venv tmux build-essential ttyd -y
 
 mkdir -p "$HOME/.local"
 
