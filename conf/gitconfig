@@ -19,6 +19,7 @@
 
 [diff]
     colorMoved = default
+    tool =  nvimdiff
 
 [init]
 	defaultBranch = main
