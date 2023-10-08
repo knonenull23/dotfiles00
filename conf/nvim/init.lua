@@ -47,6 +47,7 @@ vim.opt.path = vim.opt.path + { vim.fn.stdpath('data') .. 'mason/bin' }
 vim.o.foldmethod = 'indent'
 vim.o.foldlevelstart = 99
 vim.o.foldnestmax = 2;
+vim.o.foldminlines = 0;
 
 function ToggleSideBar()
     if vim.wo.number == true then
