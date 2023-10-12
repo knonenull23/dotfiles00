@@ -16,6 +16,7 @@
 
 [merge]
     conflictstyle = diff3
+    tool = nvimdiff
 
 [diff]
     colorMoved = default

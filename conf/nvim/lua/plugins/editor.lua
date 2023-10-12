@@ -12,6 +12,9 @@ return {
             vim.keymap.set('n', '<leader>gp', '<CMD>Git push<CR>', {})
             vim.keymap.set('n', '<leader>gx', '<CMD>Git remote prune origin<CR>', {})
             vim.keymap.set('n', '<leader>gu', '<CMD>Git commit -am "update"<CR>', {})
+            vim.keymap.set('n', '<leader>1', '<CMD>diffget LOCAL<CR>', {})
+            vim.keymap.set('n', '<leader>2', '<CMD>diffget BASE<CR>', {})
+            vim.keymap.set('n', '<leader>3', '<CMD>diffget REMOTE<CR>', {})
         end
     },
     {
