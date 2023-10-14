@@ -3,6 +3,16 @@ return {
     {
         'nvim-tree/nvim-tree.lua',
         config = function()
+            function ToggleSideBar()
+                if vim.wo.number == true then
+                    vim.wo.number = false
+                    vim.opt.scl = 'no'
+                else
+                    vim.wo.number = true
+                    vim.opt.scl = 'yes'
+                end
+            end
+
             require('nvim-tree').setup({
                 filters = {
                     dotfiles = false,
@@ -31,7 +41,8 @@ return {
                 }
             })
             vim.keymap.set('n', '<A-f>', '<CMD>Format<CR>', {})
-            vim.keymap.set('n', '<A-q>', '<CMD>NvimTreeToggle<CR>', {})
+            vim.keymap.set('n', '<A-q>',
+                '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR>', {})
             vim.keymap.set('n', '<A-S>', '<CMD>NvimTreeFindFile<CR>', {})
         end
     },

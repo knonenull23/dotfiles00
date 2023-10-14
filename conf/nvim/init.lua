@@ -27,7 +27,7 @@ require('lazy').setup({
 
 vim.cmd [[colorscheme tokyonight]]
 vim.o.hlsearch = true
-vim.wo.number = true
+vim.wo.number = false
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
 vim.o.tabstop = 4
@@ -48,16 +48,6 @@ vim.o.foldmethod = 'indent'
 vim.o.foldlevelstart = 99
 vim.o.foldnestmax = 2;
 vim.o.foldminlines = 0;
-
-function ToggleSideBar()
-    if vim.wo.number == true then
-        vim.wo.number = false
-        vim.opt.scl = 'no'
-    else
-        vim.wo.number = true
-        vim.opt.scl = 'yes'
-    end
-end
 
 vim.keymap.set("n", '<leader>q', 'za', { desc = "Fold" })
 vim.keymap.set('n', '<A-n>', '<Esc><CMD>tabnew<CR>', {})
