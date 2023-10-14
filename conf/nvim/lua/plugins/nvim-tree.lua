@@ -42,7 +42,8 @@ return {
             })
             vim.keymap.set('n', '<A-f>', '<CMD>Format<CR>', {})
             vim.keymap.set('n', '<A-q>',
-                '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR>', {})
+                '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR><CR>',
+                {})
             vim.keymap.set('n', '<A-S>', '<CMD>NvimTreeFindFile<CR>', {})
         end
     },
@@ -61,7 +62,7 @@ return {
                     vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
                 end,
                 default_direction = "right",
-                vim.keymap.set('n', '<A-Q>', '<cmd>AerialToggle!<CR>')
+                vim.keymap.set('n', '<A-a>', '<cmd>AerialToggle!<CR>')
             })
         end
     }
