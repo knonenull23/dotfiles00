@@ -4,7 +4,7 @@ return {
     config = function()
         if os.getenv("OPENAI_API_KEY") then
             require("chatgpt").setup()
-            vim.keymap.set('n', '`', '<CMD>ChatGPT<CR>', {})
+            vim.keymap.set('n', '``', '<CMD>ChatGPT<CR>', {})
         end
     end,
     dependencies = {
