@@ -8,3 +8,11 @@
 [push]
 	autoSetupRemote = true
 	default = current
+
+[merge]
+    conflictstyle = diff3
+    tool = nvimdiff
+
+[diff]
+    colorMoved = default
+    tool =  nvimdiff
