@@ -228,7 +228,6 @@ require('lazy').setup({
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
-            'rafamadriz/friendly-snippets',
         },
         config = function()
             local cmp = require 'cmp'
@@ -336,6 +335,19 @@ require('lazy').setup({
             vim.keymap.set('n', '<leader>1', '<CMD>diffget LOCAL<CR>', {})
             vim.keymap.set('n', '<leader>2', '<CMD>diffget BASE<CR>', {})
             vim.keymap.set('n', '<leader>3', '<CMD>diffget REMOTE<CR>', {})
+        end
+    },
+    {
+        'rafamadriz/friendly-snippets',
+    },
+
+    {
+        'L3MON4D3/LuaSnip',
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+        },
+        config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
         end
     },
     {
