@@ -18,6 +18,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        config = function()
+            require('lsp_signature').setup {
+            }
+        end
+    },
+    {
         'gelguy/wilder.nvim',
         config = function()
             local wilder = require('wilder')
