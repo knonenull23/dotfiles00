@@ -238,6 +238,7 @@ require('lazy').setup({
                     }
                 end
             }
+            require"lsp_signature".on_attach()
         end
     },
     {
