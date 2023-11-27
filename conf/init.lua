@@ -18,30 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        config = function()
-            require('lsp_signature').setup {
-            }
-        end
-    },
-    {
-        'gelguy/wilder.nvim',
-        config = function()
-            local wilder = require('wilder')
-            wilder.setup({ modes = { ':', '/', '?' } })
-            wilder.set_option('pipeline', {
-                wilder.branch(
-                    wilder.cmdline_pipeline(),
-                    wilder.search_pipeline()
-                ),
-            })
-            wilder.set_option('renderer', wilder.wildmenu_renderer({
-                highlighter = wilder.basic_highlighter(),
-            }))
-        end
-    },
-    {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
@@ -162,6 +138,52 @@ require('lazy').setup({
         end
     },
     {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            function ToggleSideBar()
+                if vim.wo.number == true then
+                    vim.wo.number = false
+                    vim.opt.scl = 'no'
+                else
+                    vim.wo.number = true
+                    vim.opt.scl = 'yes'
+                end
+            end
+
+            require('nvim-tree').setup({
+                filters = {
+                    dotfiles = false,
+                    custom = { '^.git$' }
+                },
+                disable_netrw = true,
+                git = {
+                    ignore = true
+                },
+                view = {
+                    width = 50,
+                },
+                update_focused_file = {
+                    enable = true
+                },
+                renderer = {
+                    icons = {
+                        show = {
+                            file = false,
+                            folder = false,
+                            folder_arrow = false,
+                            git = false,
+                            diagnostics = false
+                        }
+                    }
+                }
+            })
+            vim.keymap.set('n', '<leader>q',
+                '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR><CR>',
+                {})
+            vim.keymap.set('n', '<leader>Q', '<CMD>NvimTreeFindFile<CR>', {})
+        end
+    },
+    {
         'neovim/nvim-lspconfig',
         dependencies = {
             { 'williamboman/mason.nvim', config = true },
@@ -238,7 +260,7 @@ require('lazy').setup({
                     }
                 end
             }
-            require"lsp_signature".on_attach()
+            require "lsp_signature".on_attach()
         end
     },
     {
@@ -296,69 +318,11 @@ require('lazy').setup({
         end
     },
     {
-        'nvim-tree/nvim-tree.lua',
-        config = function()
-            function ToggleSideBar()
-                if vim.wo.number == true then
-                    vim.wo.number = false
-                    vim.opt.scl = 'no'
-                else
-                    vim.wo.number = true
-                    vim.opt.scl = 'yes'
-                end
-            end
-
-            require('nvim-tree').setup({
-                filters = {
-                    dotfiles = false,
-                    custom = { '^.git$' }
-                },
-                disable_netrw = true,
-                git = {
-                    ignore = true
-                },
-                view = {
-                    width = 50,
-                },
-                update_focused_file = {
-                    enable = true
-                },
-                renderer = {
-                    icons = {
-                        show = {
-                            file = false,
-                            folder = false,
-                            folder_arrow = false,
-                            git = false,
-                            diagnostics = false
-                        }
-                    }
-                }
-            })
-            vim.keymap.set('n', '<A-q>',
-                '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR><CR>',
-                {})
-            vim.keymap.set('n', '<A-S>', '<CMD>NvimTreeFindFile<CR>', {})
-        end
-    },
-    {
-        'tpope/vim-fugitive',
-        config = function()
-            vim.keymap.set('n', '<leader>g', '<CMD>Git<CR>', {})
-            vim.keymap.set('n', '<leader>gl', '<CMD>Git log -p --follow %<CR>', {})
-            vim.keymap.set('n', '<leader>gL', '<CMD>Git log<CR>', {})
-            vim.keymap.set('n', '<leader>gd', '<CMD>Git diff<CR>', {})
-            vim.keymap.set('n', '<leader>gb', '<CMD>Git blame<CR>', {})
-            vim.keymap.set('n', '<leader>gp', '<CMD>Git push<CR>', {})
-            vim.keymap.set('n', '<leader>1', '<CMD>diffget LOCAL<CR>', {})
-            vim.keymap.set('n', '<leader>2', '<CMD>diffget BASE<CR>', {})
-            vim.keymap.set('n', '<leader>3', '<CMD>diffget REMOTE<CR>', {})
-        end
+        'tpope/vim-fugitive'
     },
     {
         'rafamadriz/friendly-snippets',
     },
-
     {
         'L3MON4D3/LuaSnip',
         dependencies = {
@@ -398,12 +362,27 @@ require('lazy').setup({
         },
     },
     {
-        'akinsho/toggleterm.nvim',
-        version = "*",
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
         config = function()
-            require('toggleterm').setup()
-            vim.keymap.set("n", '`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
-            vim.keymap.set("t", '`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            require('lsp_signature').setup {
+            }
+        end
+    },
+    {
+        'gelguy/wilder.nvim',
+        config = function()
+            local wilder = require('wilder')
+            wilder.setup({ modes = { ':', '/', '?' } })
+            wilder.set_option('pipeline', {
+                wilder.branch(
+                    wilder.cmdline_pipeline(),
+                    wilder.search_pipeline()
+                ),
+            })
+            wilder.set_option('renderer', wilder.wildmenu_renderer({
+                highlighter = wilder.basic_highlighter(),
+            }))
         end
     }
 }, {})
@@ -432,15 +411,11 @@ vim.o.foldlevelstart = 99
 vim.o.foldnestmax = 2;
 vim.o.foldminlines = 0;
 
-vim.keymap.set("n", '<leader>q', 'za', { desc = "Fold" })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {})
 vim.keymap.set('n', '<A-n>', '<Esc><CMD>tabnew<CR>', {})
-vim.keymap.set('n', '<A-t>', '<Esc><CMD>terminal<CR>', {})
 vim.keymap.set('n', '<A-w>', '<Esc><CMD>q!<CR>', {})
-vim.keymap.set('n', '<A-x>', '<Esc><C-w>T<CR>', {})
-vim.keymap.set('n', '<A-X>', '<Esc><C-w><C-o>', {})
 vim.keymap.set('v', '<A-d>', '"_d', {})
 vim.keymap.set('n', '<A-d>', '"_dd', {})
-vim.keymap.set('t', '<C-d>', '<C-\\><C-n>', {})
 vim.keymap.set('n', '<A-j>', '<C-W>j', {})
 vim.keymap.set('n', '<A-k>', '<C-W>k', {})
 vim.keymap.set('n', '<A-h>', '<C-W>h', {})
@@ -459,11 +434,7 @@ vim.keymap.set('n', '<A->>', '<CMD>tabm +1<CR>', {})
 vim.keymap.set('t', '<A-1>', '<C-\\><C-n>1gt', {})
 vim.keymap.set('t', '<A-2>', '<C-\\><C-n>2gt', {})
 vim.keymap.set('t', '<A-3>', '<C-\\><C-n>3gt', {})
-vim.keymap.set('t', '<A-4>', '<C-\\><C-n>4gt', {})
-vim.keymap.set('t', '<A-5>', '<C-\\><C-n>5gt', {})
-vim.keymap.set('t', '<A-6>', '<C-\\><C-n>6gt', {})
-vim.keymap.set('t', '<A-7>', '<C-\\><C-n>7gt', {})
-vim.keymap.set('t', '<A-8>', '<C-\\><C-n>8gt', {})
-vim.keymap.set('t', '<A-9>', '<C-\\><C-n>9gt', {})
-vim.keymap.set('i', '<C-f>', '<C-x><C-f>', {})
+vim.keymap.set('n', '<F1>', '<CMD>diffget LOCAL<CR>', {})
+vim.keymap.set('n', '<F2>', '<CMD>diffget BASE<CR>', {})
+vim.keymap.set('n', '<F3>', '<CMD>diffget REMOTE<CR>', {})
 vim.keymap.set('n', '<F4>', ':%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i', {})
