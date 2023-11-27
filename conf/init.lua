@@ -310,7 +310,6 @@ require('lazy').setup({
                     }
                 }
             })
-            vim.keymap.set('n', '<A-f>', '<CMD>Format<CR>', {})
             vim.keymap.set('n', '<A-q>',
                 '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR><CR>',
                 {})
