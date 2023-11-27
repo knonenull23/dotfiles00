@@ -123,7 +123,7 @@ require('lazy').setup({
             vim.keymap.set('n', '<leader><leader>', "<C-^>",
                 { desc = 'Switch to previous buffer' })
 
-            vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files,
+            vim.keymap.set('n', '<leader>s', require('telescope.builtin').git_files,
                 { desc = 'Search [G]it [F]iles' })
             vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files,
                 { desc = '[S]earch [F]iles' })
