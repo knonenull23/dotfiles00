@@ -184,6 +184,15 @@ require('lazy').setup({
         end
     },
     {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = function()
+            require('toggleterm').setup()
+            vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            vim.keymap.set("t", '<leader>`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
+        end
+    },
+    {
         'neovim/nvim-lspconfig',
         dependencies = {
             { 'williamboman/mason.nvim', config = true },
