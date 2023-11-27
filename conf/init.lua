@@ -147,10 +147,9 @@ require('lazy').setup({
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,
                 { desc = 'Go to previous diagnostic message' })
             vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-            vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float,
+            vim.keymap.set('n', '[[', vim.diagnostic.open_float,
                 { desc = 'Open floating diagnostic message' })
-            vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-            vim.keymap.set('n', '<leader>F', '<CMD>Format<CR>', {})
+            vim.keymap.set('n', ']]', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
             vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
             local on_attach = function(_, bufnr)
@@ -160,19 +159,14 @@ require('lazy').setup({
                     end
                     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
                 end
-                nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-                nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+                nmap('rn', vim.lsp.buf.rename, '[R]e[n]ame')
+                nmap('ga', vim.lsp.buf.code_action, '[C]ode [A]ction')
                 nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+                nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+                nmap('gT', vim.lsp.buf.type_definition, 'Type [D]efinition')
                 nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
                 nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-                nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-                nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
-                    '[D]ocument [S]ymbols')
-                nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-                    '[W]orkspace [S]ymbols')
-                nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-                nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-                nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+                nmap('gk', vim.lsp.buf.hover, 'Hover Documentation')
                 vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
                     vim.lsp.buf.format()
                 end, { desc = 'Format current buffer with LSP' })
@@ -384,13 +378,13 @@ require('lazy').setup({
         version = "*",
         config = function()
             require('toggleterm').setup()
-            vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
-            vim.keymap.set("t", '<leader>`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            vim.keymap.set("n", '`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            vim.keymap.set("t", '`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
             if vim.loop.os_uname().sysname == 'Windows' then
-                vim.keymap.set("n", '<leader>r', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
+                vim.keymap.set("n", '``', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
                     { desc = "Run previous command in terminal" })
             else
-                vim.keymap.set("n", '<leader>r', '<Esc><CMD>TermExec cmd="!!"<CR>',
+                vim.keymap.set("n", '``', '<Esc><CMD>TermExec cmd="!!"<CR>',
                     { desc = "Run previous command in terminal" })
             end
         end
