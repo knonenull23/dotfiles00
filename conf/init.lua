@@ -18,6 +18,22 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     {
+        'gelguy/wilder.nvim',
+        config = function()
+            local wilder = require('wilder')
+            wilder.setup({ modes = { ':', '/', '?' } })
+            wilder.set_option('pipeline', {
+                wilder.branch(
+                    wilder.cmdline_pipeline(),
+                    wilder.search_pipeline()
+                ),
+            })
+            wilder.set_option('renderer', wilder.wildmenu_renderer({
+                highlighter = wilder.basic_highlighter(),
+            }))
+        end
+    },
+    {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
@@ -379,13 +395,6 @@ require('lazy').setup({
             require('toggleterm').setup()
             vim.keymap.set("n", '`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
             vim.keymap.set("t", '`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
-            if vim.loop.os_uname().sysname == 'Windows' then
-                vim.keymap.set("n", '``', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
-                    { desc = "Run previous command in terminal" })
-            else
-                vim.keymap.set("n", '``', '<Esc><CMD>TermExec cmd="!!"<CR>',
-                    { desc = "Run previous command in terminal" })
-            end
         end
     }
 }, {})
