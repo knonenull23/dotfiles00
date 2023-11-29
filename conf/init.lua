@@ -402,6 +402,23 @@ require('lazy').setup({
         end
     },
     {
+        "jackMort/ChatGPT.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("chatgpt").setup()
+            vim.keymap.set("n", 'cc', '<CMD>ChatGPT<CR>', { desc = "ChatGPT" })
+            vim.keymap.set("n", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
+            vim.keymap.set("v", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
+            vim.keymap.set("n", 'cx', '<CMD>ChatGPTRun explain_code<CR>', { desc = "Explain Code" })
+            vim.keymap.set("v", 'cx', '<CMD>ChatGPTRun explain_code<CR>', { desc = "Explain Code" })
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
+    },
+    {
         'TabbyML/vim-tabby',
         config = function()
             vim.g.tabby_trigger_mode = 'manual'
