@@ -400,6 +400,9 @@ require('lazy').setup({
                 highlighter = wilder.basic_highlighter(),
             }))
         end
+    },
+    {
+      "TabbyML/vim-tabby"
     }
 }, {})
 
