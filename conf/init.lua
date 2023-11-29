@@ -401,9 +401,12 @@ require('lazy').setup({
             }))
         end
     },
-    -- {
-    --   "TabbyML/vim-tabby"
-    -- }
+    {
+        'TabbyML/vim-tabby',
+        config = function()
+            vim.g.tabby_trigger_mode = 'manual'
+        end
+    }
 }, {})
 
 vim.cmd [[colorscheme tokyonight]]
