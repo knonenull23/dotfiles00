@@ -1,5 +1,5 @@
 -- config folder: $HOME/.config/nvim
--- requires ripgrep, npm, node, python,, cmake, gcc, g++
+-- requires ripgrep, npm, node, python, cmake, gcc
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
