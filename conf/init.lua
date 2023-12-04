@@ -482,7 +482,7 @@ vim.keymap.set('t', '<A-3>', '<C-\\><C-n>3gt', {})
 vim.keymap.set('n', '<F1>', '<CMD>diffget LOCAL<CR>', {})
 vim.keymap.set('n', '<F2>', '<CMD>diffget BASE<CR>', {})
 vim.keymap.set('n', '<F3>', '<CMD>diffget REMOTE<CR>', {})
-vim.keymap.set('n', '<F4>', ':%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i', {})
+vim.keymap.set('n', '<F4>', ':%s/<c-r>+/<c-r>+/gc<c-f>$F/i', {})
 
 -- useful CLI
 -- delete branches except currently checked out: git branch -D (git branch --list --format "%(refname:short)")
