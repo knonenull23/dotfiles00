@@ -1,5 +1,5 @@
 -- config folder: $HOME/.config/nvim OR $HOME\AppData\Local\nvim
--- requires ripgrep, npm, git, node, python, cmake, gcc
+-- requires ripgrep, npm, git, node, python, cmake, gcc, clangd
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -239,6 +239,7 @@ require('lazy').setup({
             local servers = {
                 pyright = {},
                 bashls = {},
+                clangd = {},
                 yamlls = {
                     yaml = {
                         schemas = {
@@ -275,6 +276,7 @@ require('lazy').setup({
                         on_attach = on_attach,
                         settings = servers[server_name],
                         filetypes = (servers[server_name] or {}).filetypes,
+                        cmd = (servers[server_name] or {}).cmd,
                     }
                 end
             }
