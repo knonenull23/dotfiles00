@@ -197,6 +197,7 @@ require('lazy').setup({
                 vim.keymap.set("n", '<leader>r', '<Esc><CMD>TermExec cmd="!!"<CR>',
                     { desc = "Run previous command in terminal" })
             end
+            vim.keymap.set("n", '<leader>R', ':TermExec cmd="<c-r>+"', {})
         end
     },
     {
@@ -443,7 +444,7 @@ vim.o.smarttab = true
 vim.o.expandtab = true
 vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
-vim.o.timeoutlen = 200
+vim.o.timeoutlen = 250
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.opt.path = vim.opt.path + { vim.fn.stdpath('data') .. 'mason/bin' }
