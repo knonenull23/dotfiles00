@@ -341,6 +341,9 @@ require('lazy').setup({
         'tpope/vim-fugitive'
     },
     {
+        "joshdick/onedark.vim"
+    },
+    {
         'rafamadriz/friendly-snippets',
     },
     {
@@ -363,12 +366,6 @@ require('lazy').setup({
         config = function()
             require('neodev').setup({})
         end
-    },
-    {
-        'folke/tokyonight.nvim',
-        priority = 1000,
-        lazy = false,
-        opts = {}
     },
     {
         'nvim-lualine/lualine.nvim',
@@ -438,7 +435,7 @@ require('lazy').setup({
     }
 }, {})
 
-vim.cmd [[colorscheme tokyonight]]
+vim.cmd [[colorscheme onedark]]
 vim.o.hlsearch = true
 vim.wo.number = false
 vim.o.mouse = 'a'
