@@ -191,13 +191,13 @@ require('lazy').setup({
             vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
             vim.keymap.set("t", '<leader>`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
             if vim.loop.os_uname().sysname == 'Windows' or vim.loop.os_uname().sysname == 'Windows_NT' then
-                vim.keymap.set("n", '<leader>r', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
+                vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
                     { desc = "Run previous command in terminal" })
             else
-                vim.keymap.set("n", '<leader>r', '<Esc><CMD>TermExec cmd="!!"<CR>',
+                vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="!!"<CR>',
                     { desc = "Run previous command in terminal" })
             end
-            vim.keymap.set("n", '<leader>R', ':TermExec cmd="<c-r>+"', {})
+            vim.keymap.set("n", '<leader>r', ':TermExec cmd="<c-r>+"', {})
         end
     },
     {
@@ -238,6 +238,7 @@ require('lazy').setup({
             local mason_lspconfig = require 'mason-lspconfig'
             local servers = {
                 pyright = {},
+                bashls = {},
                 yamlls = {
                     yaml = {
                         schemas = {
@@ -413,6 +414,8 @@ require('lazy').setup({
                 vim.keymap.set("v", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
                 vim.keymap.set("n", 'cx', '<CMD>ChatGPTRun explain_code<CR>', { desc = "Explain Code" })
                 vim.keymap.set("v", 'cx', '<CMD>ChatGPTRun explain_code<CR>', { desc = "Explain Code" })
+                vim.keymap.set("n", 'cf', '<CMD>ChatGPTRun fix_bugs<CR>', { desc = "Fix Bugs" })
+                vim.keymap.set("v", 'cf', '<CMD>ChatGPTRun fix_bugs<CR>', { desc = "Fix Bugs" })
             end
         end,
         dependencies = {
