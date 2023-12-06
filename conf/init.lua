@@ -408,7 +408,11 @@ require('lazy').setup({
         event = "VeryLazy",
         config = function()
             if os.getenv("OPENAI_API_KEY") then
-                require("chatgpt").setup()
+                require("chatgpt").setup({
+                    openai_params = {
+                        max_tokens = 3000
+                    }
+                })
                 vim.keymap.set("n", 'cc', '<CMD>ChatGPT<CR>', { desc = "ChatGPT" })
                 vim.keymap.set("n", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
                 vim.keymap.set("v", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
