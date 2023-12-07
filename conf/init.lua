@@ -239,7 +239,6 @@ require('lazy').setup({
             local servers = {
                 pyright = {},
                 bashls = {},
-                clangd = {},
                 yamlls = {
                     yaml = {
                         schemas = {
@@ -262,6 +261,11 @@ require('lazy').setup({
                     },
                 },
             }
+
+            if vim.fn.executable 'clangd' == 1 then
+                servers['clangd'] = {}
+            end
+
             mason_lspconfig.setup {
                 ensure_installed = vim.tbl_keys(servers),
             }
