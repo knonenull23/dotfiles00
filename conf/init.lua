@@ -190,6 +190,7 @@ require('lazy').setup({
             require('toggleterm').setup()
             vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
             vim.keymap.set("t", '<leader>`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            vim.keymap.set("n", '<leader>r', ':TermExec cmd="<c-r>+"', {})
             if vim.loop.os_uname().sysname == 'Windows' or vim.loop.os_uname().sysname == 'Windows_NT' then
                 vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
                     { desc = "Run previous command in terminal" })
@@ -197,7 +198,6 @@ require('lazy').setup({
                 vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="!!"<CR>',
                     { desc = "Run previous command in terminal" })
             end
-            vim.keymap.set("n", '<leader>r', ':TermExec cmd="<c-r>+"', {})
         end
     },
     {
@@ -234,33 +234,40 @@ require('lazy').setup({
                     vim.lsp.buf.format()
                 end, { desc = 'Format current buffer with LSP' })
             end
-
             local mason_lspconfig = require 'mason-lspconfig'
-            local servers = {
-                pyright = {},
-                bashls = {},
-                yamlls = {
-                    yaml = {
-                        schemas = {
-                            kubernetes = "*.k8s.yaml",
-                            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] =
-                            "*.cf.yaml"
+
+            local servers = {}
+
+            servers['lua_ls'] = {
+                Lua = {
+                    workspace = { checkThirdParty = false },
+                    telemetry = { enable = false },
+                    diagnostics = {
+                        globals = {
+                            'vim',
+                            'require'
                         }
                     }
                 },
-                lua_ls = {
-                    Lua = {
-                        workspace = { checkThirdParty = false },
-                        telemetry = { enable = false },
-                        diagnostics = {
-                            globals = {
-                                'vim',
-                                'require'
-                            }
-                        }
-                    },
-                },
             }
+
+            servers['yamlls'] = {
+                yaml = {
+                    schemas = {
+                        kubernetes = "*.k8s.yaml",
+                        ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] =
+                        "*.cf.yaml"
+                    }
+                }
+            }
+
+            if vim.fn.executable 'python' == 1 then
+                servers['pyright'] = {}
+            end
+
+            if vim.fn.executable 'bash' == 1 then
+                servers['bashls'] = {}
+            end
 
             if vim.fn.executable 'clangd' == 1 then
                 servers['clangd'] = {}
@@ -342,15 +349,6 @@ require('lazy').setup({
         end
     },
     {
-        'tpope/vim-fugitive'
-    },
-    {
-        "joshdick/onedark.vim"
-    },
-    {
-        'rafamadriz/friendly-snippets',
-    },
-    {
         'L3MON4D3/LuaSnip',
         dependencies = {
             'rafamadriz/friendly-snippets',
@@ -414,6 +412,12 @@ require('lazy').setup({
                 require("chatgpt").setup({
                     openai_params = {
                         max_tokens = 3000
+                    },
+                    popup_layout = {
+                        center = {
+                            width = "100%",
+                            height = "100%",
+                        }
                     }
                 })
                 vim.keymap.set("n", 'cc', '<CMD>ChatGPT<CR>', { desc = "ChatGPT" })
@@ -432,10 +436,13 @@ require('lazy').setup({
         }
     },
     {
-        'TabbyML/vim-tabby',
-        config = function()
-            vim.g.tabby_trigger_mode = 'manual'
-        end
+        'tpope/vim-fugitive'
+    },
+    {
+        "joshdick/onedark.vim"
+    },
+    {
+        'rafamadriz/friendly-snippets',
     }
 }, {})
 
