@@ -19,3 +19,4 @@ chmod u+x nvim.appimage
 ./squashfs-root/usr/bin/nvim
 sudo cp -r ./squashfs-root/usr/* /usr/local/
 rm -r squashfs-root
+rm nvim.appimage
