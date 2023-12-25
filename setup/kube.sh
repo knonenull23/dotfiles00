@@ -10,3 +10,6 @@ chmod +x /usr/local/bin/kubectl
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 sudo mv kustomize /usr/local/bin/kustomize
 chmod +x /usr/local/bin/kustomize
+
+sudo sysctl fs.inotify.max_user_instances=1280
+sudo sysctl fs.inotify.max_user_watches=655360
