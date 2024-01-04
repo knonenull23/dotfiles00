@@ -21,7 +21,7 @@
         "when": "editorTextFocus && editorHasSelection"
     },
     {
-        "key": "ctrl+D",
+        "key": "alt+d",
         "command": "editor.action.deleteLines",
     }
 ]
