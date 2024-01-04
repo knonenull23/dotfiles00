@@ -16,6 +16,14 @@
         "command": "workbench.action.navigateDown"
     },
     {
+        "key": "ctrl+f",
+        "command": "actions.find"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenPreviousEditor"
+    },
+    {
         "key": "ctrl+enter",
         "command": "workbench.action.terminal.runSelectedText",
         "when": "editorTextFocus && editorHasSelection"
