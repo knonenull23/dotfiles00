@@ -1,4 +1,29 @@
 {
     "explorer.excludeGitIgnore": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "vim.useSystemClipboard": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "yaml.customTags": [
+        "!And",
+        "!If",
+        "!Not",
+        "!Equals",
+        "!Or",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Join sequence"
+    ],
+    "yaml.format.enable": true,
+    "codeium.enableConfig": {
+        "*": false
+    },
 }
