@@ -1,9 +1,5 @@
 [
     {
-        "key": "ctrl+z",
-        "command": "workbench.action.toggleMaximizeEditorGroup"
-    },
-    {
         "key": "ctrl+w",
         "command": "workbench.action.closeActiveEditor"
     },
@@ -24,6 +20,10 @@
         "command": "workbench.action.navigateDown"
     },
     {
+        "key": "ctrl+i",
+        "command": "codeium.explainCodeBlock",
+    }
+    {
         "key": "ctrl+f",
         "command": "actions.find"
     },
@@ -37,7 +37,7 @@
         "command": "editor.action.deleteLines",
     },
     {
-        "key": "ctrl+i",
-        "command": "codeium.explainCodeBlock",
-    }
+        "key": "alt+z",
+        "command": "workbench.action.toggleMaximizeEditorGroup"
+    },
 ]
