@@ -20,10 +20,6 @@
         "command": "actions.find"
     },
     {
-        "key": "ctrl+p",
-        "command": "workbench.action.quickOpenPreviousEditor"
-    },
-    {
         "key": "ctrl+enter",
         "command": "workbench.action.terminal.runSelectedText",
         "when": "editorTextFocus && editorHasSelection"
@@ -31,5 +27,9 @@
     {
         "key": "alt+d",
         "command": "editor.action.deleteLines",
+    },
+    {
+        "key": "ctrl+i",
+        "command": "codeium.explainCodeBlock",
     }
 ]
