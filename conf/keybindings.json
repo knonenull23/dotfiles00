@@ -1,5 +1,9 @@
 [
     {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
         "key": "ctrl+h",
         "command": "workbench.action.navigateLeft"
     },
