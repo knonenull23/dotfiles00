@@ -22,7 +22,7 @@
     {
         "key": "ctrl+i",
         "command": "codeium.explainCodeBlock",
-    }
+    },
     {
         "key": "ctrl+f",
         "command": "actions.find"
