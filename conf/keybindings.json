@@ -33,6 +33,16 @@
         "when": "editorTextFocus && editorHasSelection"
     },
     {
+        "key": "ctrl+q",
+        "command": "workbench.action.closeSidebar",
+        "when": "explorerViewletVisible"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.view.explorer",
+        "when": "!explorerViewletVisible"
+    },
+    {
         "key": "alt+d",
         "command": "editor.action.deleteLines"
     },
