@@ -22,10 +22,11 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
-tnoremap <C-j> <C-\\><C-n><C-w>j
-tnoremap <C-k> <C-\\><C-n><C-w>k
-tnoremap <C-h> <C-\\><C-n><C-w>h
-tnoremap <C-l> <C-\\><C-n><C-w>l
+tnoremap <C-j> <C-n><C-w>j
+tnoremap <C-k> <C-n><C-w>k
+tnoremap <C-h> <C-n><C-w>h
+tnoremap <C-l> <C-n><C-w>l
+vnoremap <C-r> :w! /tmp/x \| : bash /tmp/x<CR>
 nnoremap <M-1> 1gt
 nnoremap <M-2> 2gt
 nnoremap <M-3> 3gt
