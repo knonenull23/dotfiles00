@@ -28,7 +28,7 @@
         "command": "actions.find"
     },
     {
-        "key": "ctrl+enter",
+        "key": "ctrl+r",
         "command": "workbench.action.terminal.runSelectedText",
         "when": "editorTextFocus && editorHasSelection"
     },
