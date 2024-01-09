@@ -21,23 +21,23 @@
     },
     {
         "key": "ctrl+i",
-        "command": "codeium.explainCodeBlock",
+        "command": "codeium.explainCodeBlock"
     },
     {
         "key": "ctrl+f",
         "command": "actions.find"
     },
     {
-        "key": "ctrl+r",
+        "key": "ctrl+e",
         "command": "workbench.action.terminal.runSelectedText",
         "when": "editorTextFocus && editorHasSelection"
     },
     {
         "key": "alt+d",
-        "command": "editor.action.deleteLines",
+        "command": "editor.action.deleteLines"
     },
     {
         "key": "alt+z",
         "command": "workbench.action.toggleMaximizeEditorGroup"
-    },
+    }
 ]
