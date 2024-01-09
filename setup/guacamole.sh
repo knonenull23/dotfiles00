@@ -28,11 +28,11 @@ echo """
 <user-mapping>
 
     <!-- Per-user authentication and config information -->
-    <authorize username="admin" password="admin">
+    <authorize username=\"admin\" password=\"admin\">
         <protocol>vnc</protocol>
-        <param name="hostname">localhost</param>
-        <param name="port">5900</param>
-        <param name="password">password</param>
+        <param name=\"hostname\">localhost</param>
+        <param name=\"port\">5900</param>
+        <param name=\"password\">password</param>
     </authorize>
 
 </user-mapping>
