@@ -1,0 +1,38 @@
+set expandtab
+set signcolumn=yes
+set updatetime=250
+set timeoutlen=250
+set completeopt=menuone,noselect
+set termguicolors
+set foldmethod=indent
+set foldlevelstart=99
+set foldnestmax=2
+set foldminlines=0
+
+execute "set <M-d>=\ed"
+execute "set <M-1>=\e1"
+execute "set <M-2>=\e2"
+execute "set <M-3>=\e3"
+inoremap <Esc> <C-\><C-n>
+nnoremap <C-n> <Esc>:tabnew<CR>
+nnoremap <C-w> <Esc>:q!<CR>
+vnoremap <M-d> "_d
+nnoremap <M-d> "_dd
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+tnoremap <C-j> <C-\\><C-n><C-w>j
+tnoremap <C-k> <C-\\><C-n><C-w>k
+tnoremap <C-h> <C-\\><C-n><C-w>h
+tnoremap <C-l> <C-\\><C-n><C-w>l
+nnoremap <M-1> 1gt
+nnoremap <M-2> 2gt
+nnoremap <M-3> 3gt
+tnoremap <M-1> <C-\\><C-n>1gt
+tnoremap <M-2> <C-\\><C-n>2gt
+tnoremap <M-3> <C-\\><C-n>3gt
+nnoremap <F1> <CMD>diffget LOCAL<CR>
+nnoremap <F2> <CMD>diffget BASE<CR>
+nnoremap <F3> <CMD>diffget REMOTE<CR>
+nnoremap <F4> :%s/<c-r>+/<c-r>+/gc<c-f>$F/i
