@@ -40,3 +40,7 @@ echo """
 
 sudo systemctl start tomcat9
 sudo systemctl start guacd
+
+x11vnc -bg -reopen -forever -display :0
+
+

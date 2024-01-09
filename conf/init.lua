@@ -191,7 +191,7 @@ require('lazy').setup({
             vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
             vim.keymap.set("t", '<leader>`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
             vim.keymap.set("n", '<leader>e', '<Esc><CMD>ToggleTermSendCurrentLine<CR>', {})
-            vim.keymap.set("v", '<leader>e', '<Esc><CMD>ToggleTermSendVisualSelection<CR>', {})
+            vim.keymap.set("v", '<leader>e', '<Esc><CMD>ToggleTermSendVisualLines<CR>', {})
             if vim.loop.os_uname().sysname == 'Windows' or vim.loop.os_uname().sysname == 'Windows_NT' then
                 vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
                     { desc = "Run previous command in terminal" })
