@@ -21,6 +21,8 @@ VER=1.5.3
 wget https://archive.apache.org/dist/guacamole/$VER/binary/guacamole-$VER.war
 sudo mv guacamole-$VER.war /var/lib/tomcat9/webapps/guacamole.war
 
+mkdir -p /etc/guacamole
+
 echo "guacd-hostname: localhost" | sudo tee /etc/guacamole/guacamole.properties
 echo "guacd-port: 4822" | sudo tee -a /etc/guacamole/guacamole.properties
 echo "user-mapping: /etc/guacamole/user-mapping.xml" | sudo tee -a /etc/guacamole/guacamole.properties
