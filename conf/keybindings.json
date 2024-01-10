@@ -33,12 +33,12 @@
         "when": "editorTextFocus && editorHasSelection"
     },
     {
-        "key": "ctrl+q",
+        "key": "alt+q",
         "command": "workbench.action.closeSidebar",
         "when": "explorerViewletVisible"
     },
     {
-        "key": "ctrl+q",
+        "key": "alt+q",
         "command": "workbench.view.explorer",
         "when": "!explorerViewletVisible"
     },
