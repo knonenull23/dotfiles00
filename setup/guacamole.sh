@@ -1,4 +1,4 @@
-sudo apt install libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev libvncserver-dev autotools-dev -y
+sudo apt install make libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev libvncserver-dev autotools-dev -y
 
 sudo apt install default-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user -y
 
@@ -20,6 +20,8 @@ sudo systemctl enable guacd
 VER=1.5.3
 wget https://archive.apache.org/dist/guacamole/$VER/binary/guacamole-$VER.war
 sudo mv guacamole-$VER.war /var/lib/tomcat9/webapps/guacamole.war
+
+mkdir -p /etc/guacamole
 
 echo "guacd-hostname: localhost" | sudo tee /etc/guacamole/guacamole.properties
 echo "guacd-port: 4822" | sudo tee -a /etc/guacamole/guacamole.properties
