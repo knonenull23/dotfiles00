@@ -1,8 +1,9 @@
-sudo apt install make libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev libvncserver-dev autotools-dev -y
+sudo pacman -Sy cairo libpng tomcat9 libvncserver
 
-sudo apt install default-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user -y
-
-sudo apt install x11vnc tigervnc-standalone-server -y
+cd /tmp
+git clone https://aur.archlinux.org/uuid.git
+cd uuid
+makepkg -si
 
 cd /tmp
 git clone https://www.github.com/apache/guacamole-server.git
@@ -14,12 +15,9 @@ make
 sudo make install
 sudo ldconfig
 
-sudo systemctl enable tomcat9
-sudo systemctl enable guacd
-
 VER=1.5.3
 wget https://archive.apache.org/dist/guacamole/$VER/binary/guacamole-$VER.war
-sudo mv guacamole-$VER.war /var/lib/tomcat9/webapps/guacamole.war
+sudo mv guacamole-$VER.war /usr/share/tomcat9/webapps/guacamole.war
 
 mkdir -p /etc/guacamole
 
@@ -40,9 +38,14 @@ echo """
 </user-mapping>
 """ | sudo tee /etc/guacamole/user-mapping.xml
 
-sudo systemctl start tomcat9
-sudo systemctl start guacd
+echo """
+session=xfce
+geometry=1920x1080
+localhost
+alwaysshared
+""" > $HOME/.vnc/config
 
-x11vnc -bg -reopen -forever -display :0
-
-
+vncpasswd
+vncserver :1
+guacd
+/usr/share/tomcat9/bin/startup.sh
