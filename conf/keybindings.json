@@ -20,8 +20,12 @@
         "command": "workbench.action.navigateDown"
     },
     {
+        "key": "alt+shift+i",
+        "command": "github.copilot.interactiveEditor.explain"
+    },
+    {
         "key": "alt+i",
-        "command": "codeium.explainCodeBlock"
+        "command": "github.copilot.interactiveEditor.generate"
     },
     {
         "key": "alt+f",
