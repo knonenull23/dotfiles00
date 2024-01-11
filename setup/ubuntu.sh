@@ -20,3 +20,5 @@ chmod u+x nvim.appimage
 sudo cp -r ./squashfs-root/usr/* /usr/local/
 rm -r squashfs-root
 rm nvim.appimage
+
+curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
