@@ -4,6 +4,8 @@ sudo apt install default-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user -
 
 sudo apt install x11vnc tigervnc-standalone-server -y
 
+sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
 cd /tmp
 git clone https://www.github.com/apache/guacamole-server.git
 cd guacamole-server

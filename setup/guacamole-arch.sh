@@ -1,5 +1,7 @@
 sudo pacman -Sy cairo libpng tomcat9 libvncserver
 
+sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
 cd /tmp
 git clone https://aur.archlinux.org/uuid.git
 cd uuid
