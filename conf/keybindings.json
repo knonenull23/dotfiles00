@@ -1,34 +1,34 @@
 [
     {
-        "key": "ctrl+w",
+        "key": "alt+w",
         "command": "workbench.action.closeActiveEditor"
     },
     {
-        "key": "ctrl+h",
+        "key": "alt+h",
         "command": "workbench.action.navigateLeft"
     },
     {
-        "key": "ctrl+l",
+        "key": "alt+l",
         "command": "workbench.action.navigateRight"
     },
     {
-        "key": "ctrl+k",
+        "key": "alt+k",
         "command": "workbench.action.navigateUp"
     },
     {
-        "key": "ctrl+j",
+        "key": "alt+j",
         "command": "workbench.action.navigateDown"
     },
     {
-        "key": "ctrl+i",
+        "key": "alt+i",
         "command": "codeium.explainCodeBlock"
     },
     {
-        "key": "ctrl+f",
+        "key": "alt+f",
         "command": "actions.find"
     },
     {
-        "key": "ctrl+e",
+        "key": "alt+e",
         "command": "workbench.action.terminal.runSelectedText",
         "when": "editorTextFocus && editorHasSelection"
     },
