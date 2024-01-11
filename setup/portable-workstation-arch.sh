@@ -1,4 +1,4 @@
-sudo pacman -Sy cairo libpng tomcat9 libvncserver
+sudo pacman -Sy cairo libpng tomcat9 libvncserver tigervnc unzip
 
 sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
