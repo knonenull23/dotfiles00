@@ -1,4 +1,5 @@
 set expandtab
+set mouse=a
 set signcolumn=yes
 set updatetime=250
 set timeoutlen=250
@@ -8,32 +9,42 @@ set foldmethod=indent
 set foldlevelstart=99
 set foldnestmax=2
 set foldminlines=0
+set splitright
 
-execute "set <M-d>=\ed"
-execute "set <M-1>=\e1"
-execute "set <M-2>=\e2"
-execute "set <M-3>=\e3"
 inoremap <Esc> <C-\><C-n>
-nnoremap <C-n> <Esc>:tabnew<CR>
-nnoremap <C-w> <Esc>:q!<CR>
+tnoremap <Esc> <C-\><C-n>
+execute "set <M-t>=\et"
+nnoremap <M-t> <C-w>:vert term<CR>
+execute "set <M-T>=\eT"
+nnoremap <M-T> <Esc>:let termid = bufnr('%')<CR>
+execute "set <M-w>=\ew"
+nnoremap <M-n> <Esc>:tabnew<CR>
+execute "set <M-w>=\ew"
+nnoremap <M-w> <Esc>:q!<CR>
+execute "set <M-d>=\ed"
 vnoremap <M-d> "_d
 nnoremap <M-d> "_dd
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-tnoremap <C-j> <C-n><C-w>j
-tnoremap <C-k> <C-n><C-w>k
-tnoremap <C-h> <C-n><C-w>h
-tnoremap <C-l> <C-n><C-w>l
-vnoremap <C-e> :w! /tmp/x \| ! bash /tmp/x<CR>
+execute "set <M-j>=\ej"
+nnoremap <M-j> <C-w>j
+execute "set <M-k>=\ek"
+nnoremap <M-k> <C-w>k
+execute "set <M-h>=\eh"
+nnoremap <M-h> <C-w>h
+execute "set <M-l>=\el"
+nnoremap <M-l> <C-w>l
+execute "set <M-e>=\ee"
+vnoremap <M-e> :%y \| :call term_sendkeys(g:termid, @")<CR> :let prevtermid = bufnr('%')<CR> :execute bufwinnr(g:termid) 'wincmd w'<CR> :normal i<CR> 
+execute "set <M-1>=\e1"
 nnoremap <M-1> 1gt
-nnoremap <M-2> 2gt
-nnoremap <M-3> 3gt
 tnoremap <M-1> <C-\\><C-n>1gt
+execute "set <M-2>=\e2"
+nnoremap <M-2> 2gt
 tnoremap <M-2> <C-\\><C-n>2gt
+execute "set <M-3>=\e3"
+nnoremap <M-3> 3gt
 tnoremap <M-3> <C-\\><C-n>3gt
 nnoremap <F1> <CMD>diffget LOCAL<CR>
 nnoremap <F2> <CMD>diffget BASE<CR>
 nnoremap <F3> <CMD>diffget REMOTE<CR>
 nnoremap <F4> :%s/<c-r>+/<c-r>+/gc<c-f>$F/i
+
