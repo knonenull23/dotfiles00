@@ -28,6 +28,10 @@
         "command": "github.copilot.interactiveEditor.generate"
     },
     {
+        "key": "alt+t",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
         "key": "alt+f",
         "command": "actions.find"
     },

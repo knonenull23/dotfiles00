@@ -116,24 +116,16 @@ require('lazy').setup({
                 },
             }
             pcall(require('telescope').load_extension, 'fzf')
-            vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,
-                { desc = '[?] Find recently opened files' })
-            vim.keymap.set('n', '<leader>/', require('telescope.builtin').buffers,
+            vim.keymap.set('n', '<C-b>', require('telescope.builtin').buffers,
                 { desc = '[ ] Find existing buffers' })
-            vim.keymap.set('n', '<leader><leader>', "<C-^>",
-                { desc = 'Switch to previous buffer' })
 
-            vim.keymap.set('n', '<leader>s', require('telescope.builtin').git_files,
-                { desc = 'Search [G]it [F]iles' })
-            vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files,
+            vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files,
                 { desc = '[S]earch [F]iles' })
-            vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,
+            vim.keymap.set('n', '<C-h>', require('telescope.builtin').help_tags,
                 { desc = '[S]earch [H]elp' })
-            vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,
-                { desc = '[S]earch current [W]ord' })
-            vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep,
+            vim.keymap.set('n', '<C-f>', require('telescope.builtin').live_grep,
                 { desc = '[S]earch by [G]rep' })
-            vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,
+            vim.keymap.set('n', '<C-g>', require('telescope.builtin').diagnostics,
                 { desc = '[S]earch [D]iagnostics' })
         end
     },
@@ -177,10 +169,10 @@ require('lazy').setup({
                     }
                 }
             })
-            vim.keymap.set('n', '<leader>q',
+            vim.keymap.set('n', '<A-q>',
                 '<CMD>lua ToggleSideBar()<CR><CMD>NvimTreeToggle()<CR><CMD>lua ToggleSideBar()<CR><CR>',
                 {})
-            vim.keymap.set('n', '<leader>Q', '<CMD>NvimTreeFindFile<CR>', {})
+            vim.keymap.set('n', '<A-Q>', '<CMD>NvimTreeFindFile<CR>', {})
         end
     },
     {
@@ -188,15 +180,15 @@ require('lazy').setup({
         version = "*",
         config = function()
             require('toggleterm').setup()
-            vim.keymap.set("n", '<leader>`', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
-            vim.keymap.set("t", '<leader>`', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
-            vim.keymap.set("n", '<leader>e', '<Esc><CMD>ToggleTermSendCurrentLine<CR>', {})
-            vim.keymap.set("v", '<leader>e', '<Esc><CMD>ToggleTermSendVisualLines<CR>', {})
+            vim.keymap.set("n", '<A-t>', '<CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            vim.keymap.set("t", '<A-t>', '<Esc><CMD>ToggleTerm<CR>', { desc = "Terminal" })
+            vim.keymap.set("n", '<A-e>', '<Esc><CMD>ToggleTermSendCurrentLine<CR>', {})
+            vim.keymap.set("v", '<A-e>', '<Esc><CMD>ToggleTermSendVisualLines<CR>', {})
             if vim.loop.os_uname().sysname == 'Windows' or vim.loop.os_uname().sysname == 'Windows_NT' then
-                vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
+                vim.keymap.set("n", '<A-r>', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
                     { desc = "Run previous command in terminal" })
             else
-                vim.keymap.set("n", '<leader>R', '<Esc><CMD>TermExec cmd="!!"<CR>',
+                vim.keymap.set("n", '<A-R>', '<Esc><CMD>TermExec cmd="!!"<CR>',
                     { desc = "Run previous command in terminal" })
             end
         end
@@ -406,37 +398,6 @@ require('lazy').setup({
         end
     },
     {
-        "jackMort/ChatGPT.nvim",
-        event = "VeryLazy",
-        config = function()
-            if os.getenv("OPENAI_API_KEY") then
-                require("chatgpt").setup({
-                    openai_params = {
-                        max_tokens = 3000
-                    },
-                    popup_layout = {
-                        center = {
-                            width = "100%",
-                            height = "100%",
-                        }
-                    }
-                })
-                vim.keymap.set("n", 'cc', '<CMD>ChatGPT<CR>', { desc = "ChatGPT" })
-                vim.keymap.set("n", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
-                vim.keymap.set("v", 'ce', '<CMD>ChatGPTEditWithInstructions<CR>', { desc = "Edit with Instructions" })
-                vim.keymap.set("n", 'cx', '<CMD>ChatGPTRun explain_code<CR>', { desc = "Explain Code" })
-                vim.keymap.set("v", 'cx', '<CMD>ChatGPTRun explain_code<CR>', { desc = "Explain Code" })
-                vim.keymap.set("n", 'cf', '<CMD>ChatGPTRun fix_bugs<CR>', { desc = "Fix Bugs" })
-                vim.keymap.set("v", 'cf', '<CMD>ChatGPTRun fix_bugs<CR>', { desc = "Fix Bugs" })
-            end
-        end,
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        }
-    },
-    {
         'tpope/vim-fugitive'
     },
     {
@@ -472,18 +433,18 @@ vim.o.foldnestmax = 2;
 vim.o.foldminlines = 0;
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', {})
-vim.keymap.set('n', '<C-n>', '<Esc><CMD>tabnew<CR>', {})
-vim.keymap.set('n', '<C-w>', '<Esc><CMD>q!<CR>', {})
+vim.keymap.set('n', '<A-n>', '<Esc><CMD>tabnew<CR>', {})
+vim.keymap.set('n', '<A-w>', '<Esc><CMD>q!<CR>', {})
 vim.keymap.set('v', '<A-d>', '"_d', {})
 vim.keymap.set('n', '<A-d>', '"_dd', {})
-vim.keymap.set('n', '<C-j>', '<C-W>j', {})
-vim.keymap.set('n', '<C-k>', '<C-W>k', {})
-vim.keymap.set('n', '<C-h>', '<C-W>h', {})
-vim.keymap.set('n', '<C-l>', '<C-W>l', {})
-vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j', {})
-vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k', {})
-vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h', {})
-vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l', {})
+vim.keymap.set('n', '<A-j>', '<C-W>j', {})
+vim.keymap.set('n', '<A-k>', '<C-W>k', {})
+vim.keymap.set('n', '<A-h>', '<C-W>h', {})
+vim.keymap.set('n', '<A-l>', '<C-W>l', {})
+vim.keymap.set('t', '<A-j>', '<C-\\><C-n><C-w>j', {})
+vim.keymap.set('t', '<A-k>', '<C-\\><C-n><C-w>k', {})
+vim.keymap.set('t', '<A-h>', '<C-\\><C-n><C-w>h', {})
+vim.keymap.set('t', '<A-l>', '<C-\\><C-n><C-w>l', {})
 vim.keymap.set('n', '<A-1>', '1gt', {})
 vim.keymap.set('n', '<A-2>', '2gt', {})
 vim.keymap.set('n', '<A-3>', '3gt', {})
