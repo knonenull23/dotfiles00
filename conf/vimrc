@@ -15,8 +15,8 @@ inoremap <Esc> <C-\><C-n>
 tnoremap <Esc> <C-\><C-n>
 execute "set <M-t>=\et"
 nnoremap <M-t> <C-w>:vert term<CR>
-execute "set <M-T>=\eT"
-nnoremap <M-T> <Esc>:let termid = bufnr('%')<CR>
+execute "set <M-m>=\em"
+nnoremap <M-m> <Esc>:let termid = bufnr('%')<CR>
 execute "set <M-w>=\ew"
 nnoremap <M-n> <Esc>:tabnew<CR>
 execute "set <M-w>=\ew"
