@@ -28,5 +28,6 @@
         "!Join sequence"
     ],
     "yaml.format.enable": true,
-    "window.customMenuBarAltFocus": false
+    "window.customMenuBarAltFocus": false,
+    "hediet.vscode-drawio.resizeImages": null
 }
