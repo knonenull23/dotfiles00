@@ -28,7 +28,5 @@
         "!Join sequence"
     ],
     "yaml.format.enable": true,
-    "codeium.enableConfig": {
-        "*": false
-    },
+    "window.customMenuBarAltFocus": false
 }
