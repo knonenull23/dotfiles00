@@ -188,7 +188,7 @@ require('lazy').setup({
                 vim.keymap.set("n", '<A-r>', '<Esc><CMD>TermExec cmd="Invoke-History"<CR>',
                     { desc = "Run previous command in terminal" })
             else
-                vim.keymap.set("n", '<A-R>', '<Esc><CMD>TermExec cmd="!!"<CR>',
+                vim.keymap.set("n", '<A-r>', '<Esc><CMD>TermExec cmd="!!"<CR>',
                     { desc = "Run previous command in terminal" })
             end
         end
