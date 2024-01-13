@@ -36,6 +36,10 @@
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
+        "key": "alt+p",
+        "command": "workbench.action.quickOpen"
+    },
+    {
         "key": "alt+f",
         "command": "actions.find"
     },

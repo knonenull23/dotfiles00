@@ -119,13 +119,11 @@ require('lazy').setup({
             vim.keymap.set('n', '<C-b>', require('telescope.builtin').buffers,
                 { desc = '[ ] Find existing buffers' })
 
-            vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files,
+            vim.keymap.set('n', '<A-p>', require('telescope.builtin').find_files,
                 { desc = '[S]earch [F]iles' })
-            vim.keymap.set('n', '<C-h>', require('telescope.builtin').help_tags,
-                { desc = '[S]earch [H]elp' })
-            vim.keymap.set('n', '<C-f>', require('telescope.builtin').live_grep,
+            vim.keymap.set('n', '<A-g>', require('telescope.builtin').live_grep,
                 { desc = '[S]earch by [G]rep' })
-            vim.keymap.set('n', '<C-g>', require('telescope.builtin').diagnostics,
+            vim.keymap.set('n', '<A-h>', require('telescope.builtin').diagnostics,
                 { desc = '[S]earch [D]iagnostics' })
         end
     },
