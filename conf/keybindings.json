@@ -1,5 +1,9 @@
 [
     {
+        "key": "alt+n",
+        "command": "workbench.action.files.newUntitledFile"
+    },
+    {
         "key": "alt+w",
         "command": "workbench.action.closeActiveEditor"
     },
@@ -34,6 +38,14 @@
     {
         "key": "alt+f",
         "command": "actions.find"
+    },
+    {
+        "key": "alt+g",
+        "command": "workbench.action.findInFiles"
+    },
+    {
+        "key": "alt+r",
+        "command": "workbench.action.terminal.runRecentCommand",
     },
     {
         "key": "alt+e",
