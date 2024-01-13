@@ -29,5 +29,11 @@
     ],
     "yaml.format.enable": true,
     "window.customMenuBarAltFocus": false,
-    "hediet.vscode-drawio.resizeImages": null
+    "hediet.vscode-drawio.resizeImages": null,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false
+    }
 }
