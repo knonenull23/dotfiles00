@@ -1,5 +1,9 @@
 [
     {
+        "key": "ctrl-k",
+        "command": "editor.action.peekDefinition"
+    },
+    {
         "key": "alt+n",
         "command": "workbench.action.files.newUntitledFile"
     },
