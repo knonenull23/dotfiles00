@@ -34,5 +34,6 @@
         "plaintext": false,
         "markdown": true,
         "scminput": false
-    }
+    },
+    "window.zoomLevel": -1
 }
