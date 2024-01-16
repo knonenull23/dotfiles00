@@ -1,3 +1,9 @@
+# if termux, install ssh and configure sshd
+# pkg install openssh
+# sshd_config should have: 
+# Subsystem sftp /data/data/com.termux/files/usr/libexec/sftp-server -d "ls /data/data/com.termux/files/home"
+# ln -s /data/data/com.termux/files/home /home/arch/files
+
 sudo pacman -Sy cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2
 
 sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
@@ -38,7 +44,9 @@ echo """
         <param name=\"password\">password</param>
         <param name=\"enable-sftp\">true</param>
         <param name=\"sftp-username\">arch</param>
-        <param name=\"sftp-password\">password</param>
+        <param name=\"sftp-password\">arch</param>
+        <param name=\"sftp-port\">8022</param>
+        <param name=\"sftp-directory\">/data/data/com.termux/files/home</param>
     </authorize>
 
 </user-mapping>
