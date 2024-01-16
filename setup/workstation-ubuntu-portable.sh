@@ -48,4 +48,5 @@ sudo systemctl start guacd
 
 x11vnc -bg -reopen -forever -display :0
 
-
+# alias run="/usr/share/tomcat9/bin/startup.sh; sleep 3; guacd; vncserver :1"
+# alias freerdp="DISPLAY=:1 freerdp-shadow-cli -auth"
