@@ -36,6 +36,9 @@ echo """
         <param name=\"hostname\">localhost</param>
         <param name=\"port\">5901</param>
         <param name=\"password\">password</param>
+        <param name=\"enable-sftp\">true</param>
+        <param name=\"sftp-username\">arch</param>
+        <param name=\"sftp-password\">password</param>
     </authorize>
 
 </user-mapping>
