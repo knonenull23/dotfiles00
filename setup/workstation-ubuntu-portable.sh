@@ -41,6 +41,8 @@ echo """
         <param name=\"enable-sftp\">true</param>
         <param name=\"sftp-username\">ubuntu</param>
         <param name=\"sftp-password\">password</param>
+        <param name=\"sftp-port\">22</param>
+        <param name=\"sftp-directory\">/data/data/com.termux/files/home</param>
     </authorize>
 
 </user-mapping>

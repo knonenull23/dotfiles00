@@ -38,7 +38,9 @@ echo """
         <param name=\"password\">password</param>
         <param name=\"enable-sftp\">true</param>
         <param name=\"sftp-username\">arch</param>
-        <param name=\"sftp-password\">password</param>
+        <param name=\"sftp-password\">arch</param>
+        <param name=\"sftp-port\">8022</param>
+        <param name=\"sftp-directory\">/data/data/com.termux/files/home</param>
     </authorize>
 
 </user-mapping>
