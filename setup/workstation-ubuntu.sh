@@ -1,4 +1,4 @@
-sudo apt install ripgrep cmake git curl wget clangd python3-pip build-essential -y
+sudo apt install ripgrep cmake git curl wget clangd python3-pip build-essential freerdp2-dev -y
 curl -sL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh > /tmp/miniconda.sh; sh /tmp/miniconda.sh
 
 curl -fsSL https://get.docker.com -o /tmp/get-docker.sh; sh /tmp/get-docker.sh
@@ -22,3 +22,6 @@ rm -r squashfs-root
 rm nvim.appimage
 
 curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
+# alias run="/usr/share/tomcat9/bin/startup.sh; sleep 3; guacd; vncserver :1"
+# alias freerdp="DISPLAY=:1 freerdp-shadow-cli -auth"

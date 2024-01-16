@@ -34,7 +34,7 @@ echo """
     <authorize username=\"admin\" password=\"admin\">
         <protocol>vnc</protocol>
         <param name=\"hostname\">localhost</param>
-        <param name=\"port\">5900</param>
+        <param name=\"port\">5901</param>
         <param name=\"password\">password</param>
     </authorize>
 
