@@ -52,3 +52,6 @@ vncpasswd
 vncserver :1
 guacd
 /usr/share/tomcat9/bin/startup.sh
+
+# alias run="/usr/share/tomcat9/bin/startup.sh; sleep 3; guacd; vncserver :1"
+# alias freerdp="DISPLAY=:1 freerdp-shadow-cli -auth"
