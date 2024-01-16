@@ -2,7 +2,6 @@
     "git.enableSmartCommit": true,
     "git.autofetch": true,
     "git.confirmSync": false,
-    "window.zoomLevel": -1,
     "window.menuBarVisibility": "toggle",
     "explorer.excludeGitIgnore": true,
     "editor.formatOnSave": true,

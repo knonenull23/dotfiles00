@@ -1,4 +1,4 @@
-sudo pacman -Sy cairo libpng tomcat9 libvncserver tigervnc unzip
+sudo pacman -Sy cairo libpng tomcat9 libvncserver tigervnc unzip freerdp
 
 sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash

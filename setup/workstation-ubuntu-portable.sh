@@ -2,7 +2,7 @@ sudo apt install make libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uu
 
 sudo apt install default-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user -y
 
-sudo apt install x11vnc tigervnc-standalone-server -y
+sudo apt install x11vnc tigervnc-standalone-server freerdp2-dev -y
 
 sudo curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
