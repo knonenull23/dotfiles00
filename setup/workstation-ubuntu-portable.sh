@@ -1,4 +1,4 @@
-sudo apt install make libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev libvncserver-dev autotools-dev libssh2-1-dev -y
+sudo apt install make libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev libvncserver-dev autotools-dev libssh2-1-dev openssh-server -y
 
 sudo apt install default-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user -y
 
