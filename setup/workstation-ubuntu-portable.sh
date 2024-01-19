@@ -42,6 +42,7 @@ echo """
         <param name=\"sftp-username\">ubuntu</param>
         <param name=\"sftp-password\">password</param>
         <param name=\"sftp-port\">22</param>
+        <param name=\"sftp-directory\">/home/ubuntu</param>
     </authorize>
 
 </user-mapping>
