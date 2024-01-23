@@ -1,4 +1,4 @@
 pacman -Syu
-pacman -Sy unzip base-devel git github-cli tmux neovim nss lsof nodejs npm ripgrep python
+pacman -Sy unzip base-devel git github-cli tmux neovim nss lsof nodejs npm ripgrep python dnsutils
 useradd -m arch
 echo "arch ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
