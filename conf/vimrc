@@ -11,10 +11,13 @@ set foldnestmax=2
 set foldminlines=0
 set splitright
 
+let prevtermid = 1
+let termid = 1
+
 inoremap <Esc> <C-\><C-n>
 tnoremap <Esc> <C-\><C-n>
 execute "set <M-t>=\et"
-nnoremap <M-t> <C-w>:vert term<CR>
+nnoremap <M-t> <C-w>:let prevtermid = prevtermid + 1 \| :let termid = prevtermid \| :vert term<CR>
 execute "set <M-m>=\em"
 nnoremap <M-m> <Esc>:let termid = bufnr('%')<CR>
 execute "set <M-w>=\ew"
@@ -33,9 +36,9 @@ nnoremap <M-h> <C-w>h
 execute "set <M-l>=\el"
 nnoremap <M-l> <C-w>l
 execute "set <M-e>=\ee"
-vnoremap <M-e> :%y \| :call term_sendkeys(g:termid, @")<CR> :let prevtermid = bufnr('%')<CR> :execute bufwinnr(g:termid) 'wincmd w'<CR> :normal i<CR> 
+vnoremap <M-e> :%y \| :call term_sendkeys(g:termid, @")<CR> :execute bufwinnr(g:termid) 'wincmd w'<CR> :normal i<CR> 
 execute "set <M-r>=\er"
-nnoremap <M-r> :call term_sendkeys(g:termid, "!!")<CR> :let prevtermid = bufnr('%')<CR> :execute bufwinnr(g:termid) 'wincmd w'<CR> :normal i<CR> 
+nnoremap <M-r> :call term_sendkeys(g:termid, "!!")<CR> :execute bufwinnr(g:termid) 'wincmd w'<CR> :normal i<CR> 
 execute "set <M-1>=\e1"
 nnoremap <M-1> 1gt
 tnoremap <M-1> <C-\\><C-n>1gt
