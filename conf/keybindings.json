@@ -28,12 +28,20 @@
         "command": "workbench.action.navigateDown"
     },
     {
+        "key": "alt+i",
+        "command": "github.copilot.interactiveEditor.generate"
+    },
+    {
+        "key": "alt+k",
+        "command": "github.copilot.interactiveEditor.generateDocs"
+    },
+    {
         "key": "alt+shift+i",
         "command": "github.copilot.interactiveEditor.explain"
     },
     {
-        "key": "alt+i",
-        "command": "github.copilot.interactiveEditor.generate"
+        "key": "alt+shift+k",
+        "command": "github.copilot.interactiveEditor.fix"
     },
     {
         "key": "alt+t",
