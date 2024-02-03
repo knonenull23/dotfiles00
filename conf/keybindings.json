@@ -33,7 +33,7 @@
     },
     {
         "key": "alt+shift+i",
-        "command": "github.copilot.interactiveEditor.generateDocs"
+        "command": "github.copilot.interactiveEditor.explain"
     },
     {
         "key": "alt+o",
@@ -41,7 +41,7 @@
     },
     {
         "key": "alt+shift+o",
-        "command": "github.copilot.interactiveEditor.explain"
+        "command": "github.copilot.interactiveEditor.generateDocs"
     },
     {
         "key": "alt+t",
