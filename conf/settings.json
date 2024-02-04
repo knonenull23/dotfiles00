@@ -35,5 +35,7 @@
         "markdown": true,
         "scminput": false
     },
-    "window.zoomLevel": -1
+    "window.zoomLevel": -1,
+    "notebook.output.textLineLimit": 50,
+    "vim.foldfix": true
 }
