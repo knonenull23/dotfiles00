@@ -1,0 +1,14 @@
+{
+    "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "eamodio.gitlens",
+        "ms-vscode-remote.remote-ssh",
+        "redhat.vscode-yaml",
+        "github.copilot",
+        "ms-vscode.remote-explorer",
+        "vscodevim.vim",
+        "ms-vscode.remote-server",
+        "ms-vscode.vscode-typescript-next"
+    ]
+}
