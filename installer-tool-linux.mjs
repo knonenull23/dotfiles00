@@ -16,10 +16,10 @@ async function getOperatingSystem() {
     const data = await fs.readFile('/etc/os-release', 'utf8');
 
     if (data.includes("Ubuntu")) {
-        console.log("Detected OS: ubuntu");
+        console.info("Detected OS: ubuntu");
         return "ubuntu";
     } else if (data.includes("Arch")) {
-        console.log("Detected OS: arch");
+        console.info("Detected OS: arch");
         return "arch";
     } else {
         console.error("Unsupported Operating System");
@@ -31,7 +31,7 @@ async function getCpuArchitecture() {
     const validArch = ['arm64', 'x64'];
     const detectedArch = os.arch();
     if (validArch.includes(detectedArch)) {
-        console.log(`Detected Architecture: ${detectedArch}`);
+        console.info(`Detected Architecture: ${detectedArch}`);
         return detectedArch;
     } else {
         console.error("Unsupported CPU Architecture");
@@ -40,12 +40,18 @@ async function getCpuArchitecture() {
 }
 
 class Installer {
-    installBasePackages() {
-        console.log.info("Installing base packages..")
+    async installBasePackages() {
+        console.info("Installing base packages..")
+    }
+
+    async installDocker() {
+        await $`curl -fsSL https://get.docker.com -o /tmp/get-docker.sh; sh /tmp/get-docker.sh`
+        await $`sudo usermod -aG docker ${os.userInfo().username}`
     }
 }
 class X64UbuntuInstaller extends Installer {
     async installBasePackages() {
+        super.installBasePackages()
         await $`sudo apt update`;
         await $`sudo apt install -y git curl vim neovim unzip`;
 
@@ -56,6 +62,10 @@ class X64UbuntuInstaller extends Installer {
         await $`./nvim.appimage --appimage-extract`
         echo`Run the following command:`
         echo`echo 'export PATH=${os.homedir}/.neovim/squashfs-root/usr/bin:$PATH' >> ${os.homedir}/.bashrc`;
+    }
+
+    async installDocker() {
+        super.installDocker()
     }
 }
 
@@ -90,12 +100,20 @@ const action = await select({
             value: 'baseInstall',
             description: 'Install basic packages for file editing and manipulation.',
         },
+        {
+            name: 'Install Docker',
+            value: 'dockerInstall',
+            description: 'Install Docker and configure for non-sudo use.',
+        },
     ],
 });
 
 switch (action) {
     case "baseInstall":
         await _installer.installBasePackages()
+        break;
+    case "dockerInstall":
+        await _installer.installDocker()
         break;
     default:
         console.error("Invalid action")
