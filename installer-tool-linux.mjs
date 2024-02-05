@@ -48,15 +48,22 @@ class Installer {
         await $`curl -fsSL https://get.docker.com -o /tmp/get-docker.sh; sh /tmp/get-docker.sh`
         await $`sudo usermod -aG docker ${os.userInfo().username}`
     }
+
+    async installNodeLTS() {
+        await $`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+        await $`source ${os.homedir}/.nvm/nvm.sh && nvm install --lts`
+        echo`Run the following command: `
+        echo`nvm use--lts`
+    }
 }
 class X64UbuntuInstaller extends Installer {
     async installBasePackages() {
         super.installBasePackages()
         await $`sudo apt update`;
-        await $`sudo apt install -y git curl vim neovim unzip`;
+        await $`sudo apt install - y git curl vim neovim unzip`;
 
-        await $`rm -rf ${os.homedir}/.neovim; mkdir -p ${os.homedir}/.neovim`
-        cd(`${os.homedir}/.neovim`)
+        await $`rm - rf ${os.homedir} /.neovim; mkdir -p ${os.homedir}/.neovim`
+        cd(`${os.homedir} /.neovim`)
         await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
         await $`chmod u+x nvim.appimage`
         await $`./nvim.appimage --appimage-extract`
@@ -105,6 +112,11 @@ const action = await select({
             value: 'dockerInstall',
             description: 'Install Docker and configure for non-sudo use.',
         },
+        {
+            name: 'Install Node LTS',
+            value: 'nodeLTSInstall',
+            description: 'Install NodeJS LTS using Node Version Manager.',
+        },
     ],
 });
 
@@ -114,6 +126,9 @@ switch (action) {
         break;
     case "dockerInstall":
         await _installer.installDocker()
+        break;
+    case "nodeLTSInstall":
+        await _installer.installNodeLTS()
         break;
     default:
         console.error("Invalid action")
