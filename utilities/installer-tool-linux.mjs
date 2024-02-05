@@ -48,6 +48,14 @@ class X64UbuntuInstaller extends Installer {
     async installBasePackages() {
         await $`sudo apt update`;
         await $`sudo apt install -y git curl vim neovim unzip`;
+
+        await $`rm -rf ${os.homedir}/.neovim; mkdir -p ${os.homedir}/.neovim`
+        cd(`${os.homedir}/.neovim`)
+        await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
+        await $`chmod u+x nvim.appimage`
+        await $`./nvim.appimage --appimage-extract`
+        echo`Run the following command:`
+        echo`echo 'export PATH=${os.homedir}/.neovim/squashfs-root/usr/bin:$PATH' >> ${os.homedir}/.bashrc`;
     }
 }
 
