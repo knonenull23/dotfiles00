@@ -22,6 +22,7 @@ const choices = await checkbox({
         { name: 'Guacamole', value: 'guacamole' },
         { name: 'FileBrowser', value: 'filebrowser' },
         { name: 'Docker', value: 'docker' },
+        { name: 'Kubernetes', value: 'kubernetes' },
     ],
 });
 
@@ -50,6 +51,9 @@ for (const choice of choices) {
             break;
         case 'docker':
             await install.docker()
+            break;
+        case 'kubernetes':
+            await install.kubernetes()
             break;
         default:
             log_error(`Unknown capability: ${choice}`);

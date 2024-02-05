@@ -31,6 +31,7 @@ abstract class Installer {
     abstract guacamole(): Promise<void>
     abstract filebrowser(): Promise<void>
     abstract docker(): Promise<void>
+    abstract kubernetes(): Promise<void>
 }
 
 class x64UbuntuInstaller extends Installer {
@@ -128,6 +129,23 @@ class x64UbuntuInstaller extends Installer {
     async docker(): Promise<void> {
         await $`curl -fsSL https://get.docker.com -o /tmp/get-docker.sh; sh /tmp/get-docker.sh`
         await $`sudo usermod -aG docker ${os.userInfo().username}`
+    }
+
+    async kubernetes(): Promise<void> {
+        await $`curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64`
+        await $`sudo mv minikube-linux-amd64 /usr/local/bin/minikube`
+        await $`chmod +x /usr/local/bin/minikube`
+
+        await $`curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"`
+        await $`sudo mv kubectl /usr/local/bin/kubectl`
+        await $`chmod +x /usr/local/bin/kubectl`
+
+        await $`curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash`
+        await $`sudo mv kustomize /usr/local/bin/kustomize`
+        await $`chmod +x /usr/local/bin/kustomize`
+
+        await $`sudo sysctl fs.inotify.max_user_instances=1280`
+        await $`sudo sysctl fs.inotify.max_user_watches=655360`
     }
 }
 
