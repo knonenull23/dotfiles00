@@ -19,6 +19,7 @@ const choices = await checkbox({
         { name: 'OpenSSH Server', value: 'openSshServer' },
         { name: 'Github CLI', value: 'githubCli' },
         { name: 'VS Code Editor', value: 'vsCodeEditor' },
+        { name: 'Guacamole', value: 'guacamole' },
     ],
 });
 
@@ -37,6 +38,10 @@ for (const choice of choices) {
             install.githubCli()
             break;
         case 'vsCodeEditor':
+            install.vsCodeEditor()
+            break;
+        case 'guacamole':
+            install.guacamole()
             break;
         default:
             log_error(`Unknown capability: ${choice}`);

@@ -28,6 +28,7 @@ abstract class Installer {
     abstract openSshServer(): void
     abstract githubCli(): void
     abstract vsCodeEditor(): void
+    abstract guacamole(): void
 }
 
 class x64UbuntuInstaller extends Installer {
@@ -60,8 +61,58 @@ class x64UbuntuInstaller extends Installer {
         await $`gh auth login`
     }
 
-    vsCodeEditor(): void {
+    async vsCodeEditor(): Promise<void> {
         log_info("Installing VS Code Editor on Ubuntu")
+        await $`sudo apt -y install wget gpg`
+        await $`wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg`
+        await $`sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg`
+        await $`sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'`
+        await $`rm -f packages.microsoft.gpg`
+        await $`sudo apt install apt-transport-https`
+        await $`sudo apt update`
+        await $`sudo apt -y install code`
+    }
+
+    async guacamole(): Promise<void> {
+        log_info("Installing Guacamole on Ubuntu")
+        await $`sudo apt update`
+        await $`sudo apt install -y git make libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin uuid-dev libossp-uuid-dev libvncserver-dev autotools-dev libssh2-1-dev openssh-server`
+        await $`sudo apt install -y default-jdk tomcat9 tomcat9-admin tomcat9-common tomcat9-user`
+        await $`sudo apt install -y x11vnc tigervnc-standalone-server`
+        await $`sudo apt -y autoremove`
+
+        await $`mkdir -p /tmp/guacamole-install`
+        await $`sudo mkdir -p /etc/guacamole`
+        await $`sudo cp conf/guacamole/guacamole.properties /etc/guacamole/guacamole.properties`
+        await $`sudo cp conf/guacamole/user-mapping.xml /etc/guacamole/user-mapping.xml`
+
+        cd('/tmp/guacamole-install')
+        await $`if cd guacamole-server; then git pull; else git clone https://www.github.com/apache/guacamole-server.git; fi`
+        cd('/tmp/guacamole-install/guacamole-server')
+        await $`autoreconf -fi`
+        await $`./configure --with-init-dir=/etc/init.d`
+        await $`make`
+        await $`sudo make install`
+        await $`sudo ldconfig`
+        await $`sudo systemctl enable tomcat9`
+        await $`sudo systemctl enable guacd`
+
+        await $`wget https://archive.apache.org/dist/guacamole/1.5.3/binary/guacamole-1.5.3.war`
+        await $`sudo mv guacamole-1.5.3.war /var/lib/tomcat9/webapps/guacamole.war`
+
+        const successTomcat = await $`systemctl is-active tomcat9`
+        if (successTomcat.stdout.match('inactive')) {
+            log_error("Tomcat Server is not active.")
+        }
+
+        const successGuacd = await $`systemctl is-active tomcat9`
+        if (successGuacd.stdout.match('inactive')) {
+            log_error("Guacd Server is not active.")
+        }
+
+        await $`vncpasswd`
+        await $`Run the following command to start a VNC on :0`
+        await $`x11vnc -bg -reopen -forever -display :0`
     }
 }
 
