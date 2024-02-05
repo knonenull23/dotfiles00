@@ -73,6 +73,10 @@ class x64UbuntuInstaller extends Installer {
         await $`sudo apt install apt-transport-https`
         await $`sudo apt update`
         await $`sudo apt -y install code`
+        const extensions = fs.readJsonSync('conf/vscode/extensions.json')
+        for (const extension of extensions['extensions']) {
+            await $`code --install-extension ${extension}`
+        }
     }
 
     async guacamole(): Promise<void> {
