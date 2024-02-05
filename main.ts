@@ -20,6 +20,8 @@ const choices = await checkbox({
         { name: 'Github CLI', value: 'githubCli' },
         { name: 'VS Code Editor', value: 'vsCodeEditor' },
         { name: 'Guacamole', value: 'guacamole' },
+        { name: 'FileBrowser', value: 'filebrowser' },
+        { name: 'Docker', value: 'docker' },
     ],
 });
 
@@ -29,19 +31,25 @@ const install = getInstaller()
 for (const choice of choices) {
     switch (choice) {
         case 'fileEditingAndManipulation':
-            install.fileEditingAndManipulation()
+            await install.fileEditingAndManipulation()
             break;
         case 'openSshServer':
-            install.openSshServer()
+            await install.openSshServer()
             break;
         case 'githubCli':
-            install.githubCli()
+            await install.githubCli()
             break;
         case 'vsCodeEditor':
-            install.vsCodeEditor()
+            await install.vsCodeEditor()
             break;
         case 'guacamole':
-            install.guacamole()
+            await install.guacamole()
+            break;
+        case 'filebrowser':
+            await install.filebrowser()
+            break;
+        case 'docker':
+            await install.docker()
             break;
         default:
             log_error(`Unknown capability: ${choice}`);

@@ -24,11 +24,13 @@ enum CpuArchitecture {
 }
 
 abstract class Installer {
-    abstract fileEditingAndManipulation(): void
-    abstract openSshServer(): void
-    abstract githubCli(): void
-    abstract vsCodeEditor(): void
-    abstract guacamole(): void
+    abstract fileEditingAndManipulation(): Promise<void>
+    abstract openSshServer(): Promise<void>
+    abstract githubCli(): Promise<void>
+    abstract vsCodeEditor(): Promise<void>
+    abstract guacamole(): Promise<void>
+    abstract filebrowser(): Promise<void>
+    abstract docker(): Promise<void>
 }
 
 class x64UbuntuInstaller extends Installer {
@@ -113,6 +115,15 @@ class x64UbuntuInstaller extends Installer {
         await $`vncpasswd`
         await $`Run the following command to start a VNC on :0`
         await $`x11vnc -bg -reopen -forever -display :0`
+    }
+
+    async filebrowser(): Promise<void> {
+        await $`curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash`
+    }
+
+    async docker(): Promise<void> {
+        await $`curl -fsSL https://get.docker.com -o /tmp/get-docker.sh; sh /tmp/get-docker.sh`
+        await $`sudo usermod -aG docker ${os.userInfo().username}`
     }
 }
 
