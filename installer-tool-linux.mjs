@@ -63,11 +63,12 @@ class Installer {
 class X64UbuntuInstaller extends Installer {
     async installBasePackages() {
         super.installBasePackages()
-        await $`sudo apt update`;
-        await $`sudo apt install - y git curl vim neovim unzip`;
+        await $`sudo apt update`
+        await $`sudo apt install -y git curl vim neovim unzip tmux`
 
-        await $`rm - rf ${os.homedir} /.neovim; mkdir -p ${os.homedir}/.neovim`
+        await $`mkdir -p ${os.homedir}/.neovim`
         cd(`${os.homedir} /.neovim`)
+        await $`rm -rf ${os.homedir}/.neovim`
         await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
         await $`chmod u+x nvim.appimage`
         await $`./nvim.appimage --appimage-extract`
@@ -76,7 +77,10 @@ class X64UbuntuInstaller extends Installer {
     }
 
     async installAdvancedPackages() {
+        this.installBasePackages()
         super.installAdvancedPackages()
+        await $`sudo apt update`
+        await $`sudo apt install ripgrep clangd python3 python3-pip build-essential dnsutils openssh-server make -y`
     }
 
     async installDocker() {
@@ -116,6 +120,11 @@ const action = await select({
             description: 'Install basic packages for file editing and manipulation.',
         },
         {
+            name: 'Install Advanced Packages',
+            value: 'advancedInstall',
+            description: 'Install advanced packages for code builds and development.',
+        },
+        {
             name: 'Install Docker',
             value: 'dockerInstall',
             description: 'Install Docker and configure for non-sudo use.',
@@ -131,6 +140,9 @@ const action = await select({
 switch (action) {
     case "baseInstall":
         await _installer.installBasePackages()
+        break;
+    case "advancedInstall":
+        await _installer.installAdvancedPackages()
         break;
     case "dockerInstall":
         await _installer.installDocker()
