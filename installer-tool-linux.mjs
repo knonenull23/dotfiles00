@@ -16,13 +16,13 @@ async function getOperatingSystem() {
     const data = await fs.readFile('/etc/os-release', 'utf8');
 
     if (data.includes("Ubuntu")) {
-        console.info("Detected OS: ubuntu");
+        echo`Detected OS: ubuntu`;
         return "ubuntu";
     } else if (data.includes("Arch")) {
-        console.info("Detected OS: arch");
+        echo`Detected OS: arch`;
         return "arch";
     } else {
-        console.error("Unsupported Operating System");
+        echo`Unsupported Operating System`;
         process.exit(1);
     }
 }
@@ -31,17 +31,21 @@ async function getCpuArchitecture() {
     const validArch = ['arm64', 'x64'];
     const detectedArch = os.arch();
     if (validArch.includes(detectedArch)) {
-        console.info(`Detected Architecture: ${detectedArch}`);
+        echo`Detected Architecture: ${detectedArch}`;
         return detectedArch;
     } else {
-        console.error("Unsupported CPU Architecture");
+        echo`Unsupported CPU Architecture`;
         exit(1);
     }
 }
 
 class Installer {
     async installBasePackages() {
-        console.info("Installing base packages..")
+        echo`Installing base packages..`
+    }
+
+    async installAdvancedPackages() {
+        echo`Installing advanced packages..`
     }
 
     async installDocker() {
@@ -69,6 +73,10 @@ class X64UbuntuInstaller extends Installer {
         await $`./nvim.appimage --appimage-extract`
         echo`Run the following command:`
         echo`echo 'export PATH=${os.homedir}/.neovim/squashfs-root/usr/bin:$PATH' >> ${os.homedir}/.bashrc`;
+    }
+
+    async installAdvancedPackages() {
+        super.installAdvancedPackages()
     }
 
     async installDocker() {
@@ -131,6 +139,6 @@ switch (action) {
         await _installer.installNodeLTS()
         break;
     default:
-        console.error("Invalid action")
+        echo`Invalid action.`
         process.exit(1)
 }
