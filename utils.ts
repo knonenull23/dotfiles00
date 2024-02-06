@@ -246,7 +246,7 @@ class Arm64ArchInstaller extends Installer {
 
     async guacamole(): Promise<void> {
         log_info("Installing Guacamole on Arch")
-        await $`sudo pacman -sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
+        await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
 
         await $`[ -d /tmp/uuid ] && rm -rf /tmp/uuid`
         cd("/tmp")
