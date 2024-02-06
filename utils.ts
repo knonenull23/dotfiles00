@@ -233,7 +233,7 @@ class Arm64ArchInstaller extends Installer {
         cd("/tmp")
         await $`git clone https://aur.archlinux.org/visual-studio-code-bin.git`
         cd("/tmp/visual-studio-code-bin")
-        await $`makepkg -si"`
+        await $`makepkg -si`
     }
 
     async neovim(): Promise<void> {
