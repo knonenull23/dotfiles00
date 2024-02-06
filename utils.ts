@@ -245,7 +245,8 @@ class Arm64ArchInstaller extends Installer {
 
     async neovim(): Promise<void> {
         await $`sudo pacman -Sy --noconfirm neovim nodejs npm`
-        await $`cp conf/vim/init.lua ${os.homedir()}/.nvim/config/nvim/init.lua`
+        await $`mkdir ${os.homedir()}/.config/nvim`
+        await $`cp conf/vim/init.lua ${os.homedir()}/.config/nvim/init.lua`
     }
 
 
