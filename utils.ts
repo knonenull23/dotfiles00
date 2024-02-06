@@ -230,7 +230,7 @@ class Arm64ArchInstaller extends Installer {
 
     async vsCodeEditor(): Promise<void> {
         log_info("Installing VS Code Editor on Arch")
-        await $`[ -d /tmp/visual-studio-code-bin ] && rm -rf /tmp/visual-studio-code-bin`
+        await $`if [ -d /tmp/visual-studio-code-bin ]; then rm -rf /tmp/visual-studio-code-bin; fi`
         cd("/tmp")
         await $`git clone https://aur.archlinux.org/visual-studio-code-bin.git`
         cd("/tmp/visual-studio-code-bin")
@@ -246,15 +246,15 @@ class Arm64ArchInstaller extends Installer {
 
     async guacamole(): Promise<void> {
         log_info("Installing Guacamole on Arch")
-        await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
+        // await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
 
-        await $`[ -d /tmp/uuid ] && rm -rf /tmp/uuid`
+        await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
         cd("/tmp")
         await $`git clone https://aur.archlinux.org/uuid.git`
         cd("/tmp/uuid")
         await $`yes | makepkg -si`
 
-        await $`[ -d /tmp/guacamole-server ] && rm -rf /tmp/guacamole-server`
+        await $`if [ -d /tmp/guacamole-server ]; then rm -rf /tmp/guacamole-server; fi`
         cd("/tmp")
         await $`git clone https://www.github.com/apache/guacamole-server.git`
         cd("/tmp/guacamole-server")
