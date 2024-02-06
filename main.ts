@@ -19,6 +19,7 @@ const choices = await checkbox({
         { name: 'OpenSSH Server', value: 'openSshServer' },
         { name: 'Github CLI', value: 'githubCli' },
         { name: 'VS Code Editor', value: 'vsCodeEditor' },
+        { name: 'Neovim', value: 'neovim' },
         { name: 'Guacamole', value: 'guacamole' },
         { name: 'FileBrowser', value: 'filebrowser' },
         { name: 'Docker', value: 'docker' },
@@ -42,6 +43,9 @@ for (const choice of choices) {
             break;
         case 'vsCodeEditor':
             await install.vsCodeEditor()
+            break;
+        case 'neovim':
+            await install.neovim()
             break;
         case 'guacamole':
             await install.guacamole()

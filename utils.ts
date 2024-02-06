@@ -80,6 +80,26 @@ class x64UbuntuInstaller extends Installer {
         }
     }
 
+    async neovim(): Promise<void> {
+        log_info("Installing Neovim on Ubuntu")
+        await $`mkdir -p ${os.homedir()}/.nvim; mkdir -p ${os.homedir()}/.config; mkdir -p ${os.homedir()}/.local/share`
+        await $`mkdir -p ${os.homedir()}/.nvim/config/nvim; ln -sf ${os.homedir()}/.nvim/config/nvim ${os.homedir()}/.config`
+        await $`mkdir -p ${os.homedir()}/.nvim/share/nvim; ln -sf ${os.homedir()}/.nvim/share/nvim ${os.homedir()}/.local/share`
+        await $`cp conf/vim/init.lua ${os.homedir()}/.nvim/config/nvim/init.lua`
+        await $`mkdir -p /tmp/neovim-install`
+        cd("/tmp/neovim-install")
+        await $`curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage`
+        await $`chmod u+x nvim.appimage`
+        await $`./nvim.appimage --appimage-extract`
+        await $`cp -r squashfs-root ${os.homedir()}/.nvim`
+        await $`sudo ln -sf ${os.homedir()}/.nvim/squashfs-root/AppRun /usr/local/bin/nvim`
+
+        await $`curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh -o /tmp/get-nvm.bash; bash /tmp/get-nvm.bash`
+        log_warn("Run the following command before running nvim to install all the plugins")
+        log_warn("source ~/.bashrc; nvm install --lts; nvim use --lts")
+    }
+
+
     async guacamole(): Promise<void> {
         log_info("Installing Guacamole on Ubuntu")
         await $`sudo apt update`
