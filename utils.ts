@@ -208,8 +208,7 @@ class x64UbuntuInstaller extends Installer {
         process.env.COMMAND = "proot-distro login archlinux -- pacman -Syu --noconfirm"; await termuxRun()
         process.env.COMMAND = "proot-distro login archlinux -- useradd -m arch || true"; await termuxRun()
         log_warn("Run the following command to enable sudo for the arch user")
-        log_warn("proot-distro login archlinux; echo 'arch ALL=(ALL) ALL' >> /etc/sudoers")
-        // process.env.COMMAND = "proot-distro login archlinux -- git clone https://aur.archlinux.org/visual-studio-code-bin.git; cd visual-studio-code-bin; makepkg -si"; await termuxRun()
+        log_warn("proot-distro login archlinux; echo 'arch ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers")
         // rm -r /home/arch/.config/Code/Cache /home/arch/.config/Code/CachedData/
     }
 }
@@ -217,17 +216,21 @@ class x64UbuntuInstaller extends Installer {
 class Arm64ArchInstaller extends Installer {
     async fileEditingAndManipulation(): Promise<void> {
         log_info("Installing file editing and manipulation capabilities on Arch")
-        // await $`pacman -Sy --noconfirm unzip base-devel git github-cli neovim nss libxss tmux lsof nodejs npm ripgrep python dnsutils xfce4 xdg-utils`
-        await $`sudo pacman -Sy --noconfirm unzip base-devel git github-cli nss libxss tmux lsof ripgrep python dnsutils`
+        await $`sudo pacman -Sy --noconfirm unzip base-devel git nss libxss tmux lsof ripgrep python dnsutils`
     }
 
     async openSshServer(): Promise<void> {
+        throw new Error("Method not implemented.")
     }
 
     async githubCli(): Promise<void> {
+        log_info("Installing Github CLI on Arch")
+        await $`pacman -Sy --noconfirm github-cli`
     }
 
     async vsCodeEditor(): Promise<void> {
+        log_info("Installing VS Code Editor on Arch")
+        await $`git clone https://aur.archlinux.org/visual-studio-code-bin.git; cd visual-studio-code-bin; makepkg -si"`
     }
 
     async neovim(): Promise<void> {
