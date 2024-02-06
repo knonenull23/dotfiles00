@@ -259,7 +259,7 @@ class Arm64ArchInstaller extends Installer {
         await $`git clone https://www.github.com/apache/guacamole-server.git`
         cd("/tmp/guacamole-server")
         await $`autoreconf -fi`
-        await $`.config --with-init-dir=/etc/init.d`
+        await $`./configure --with-init-dir=/etc/init.d`
         await $`make`
         await $`sudo make install`
         await $`sudo ldconfig`
