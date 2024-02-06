@@ -15,6 +15,7 @@ import { getInstaller } from './utils'
 const choices = await checkbox({
     message: 'Select capabilities to install.',
     choices: [
+        new Separator("Local Device"),
         { name: 'File Editing and Manipulation', value: 'fileEditingAndManipulation' },
         { name: 'OpenSSH Server', value: 'openSshServer' },
         { name: 'Github CLI', value: 'githubCli' },
@@ -24,6 +25,8 @@ const choices = await checkbox({
         { name: 'FileBrowser', value: 'filebrowser' },
         { name: 'Docker', value: 'docker' },
         { name: 'Kubernetes', value: 'kubernetes' },
+        new Separator("External Device"),
+        { name: 'Bootstrap Termux', value: 'termux' },
     ],
 });
 
@@ -59,6 +62,9 @@ for (const choice of choices) {
         case 'kubernetes':
             await install.kubernetes()
             break;
+        case 'termux':
+            await install.termux()
+            break
         default:
             log_error(`Unknown capability: ${choice}`);
             break;

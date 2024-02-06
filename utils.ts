@@ -1,4 +1,9 @@
 import 'zx/globals'
+import select from '@inquirer/select';
+
+export function termuxRun(): ProcessPromise {
+    return $`adb shell "run-as com.termux files/usr/bin/bash -c 'export PATH=/data/data/com.termux/files/usr/bin:$PATH; export LD_PRELOAD=/data/data/com.termux/files/usr/lib/libtermux-exec.so; $COMMAND'"`
+}
 
 export function log_info(message: string): void {
     console.log(Date().toString() + " " + chalk.green(message))
@@ -33,6 +38,7 @@ abstract class Installer {
     abstract filebrowser(): Promise<void>
     abstract docker(): Promise<void>
     abstract kubernetes(): Promise<void>
+    abstract termux(): Promise<void>
 }
 
 class x64UbuntuInstaller extends Installer {
@@ -167,6 +173,45 @@ class x64UbuntuInstaller extends Installer {
 
         await $`sudo sysctl fs.inotify.max_user_instances=1280`
         await $`sudo sysctl fs.inotify.max_user_watches=655360`
+    }
+
+    async termux(): Promise<void> {
+        await $`sudo apt update`
+        await $`sudo apt install -y android-sdk-platform-tools`
+        await $`adb start-server`
+        log_warn("Ensure Termux is installed and uses a debug build: https://github.com/termux/termux-app/releases")
+        await question("Connnect your device to the computer, and activate USB debugging. Ensure that the device is authorized.")
+
+        // Select Device to Bootstrap
+        const devices = await $`adb devices`.pipe($`cat`).pipe($`tail -n +2`).pipe($`grep -P 'device'`)
+        let choices: { name: string; value: string }[] = [] // Define the type of choices array
+        for (let device of devices.stdout.split("\n")) {
+            choices.push({ name: device, value: device.split(/\s+/)[0] })
+        }
+        const selectedDevice = await select({
+            message: 'Select the device to bootstrap.',
+            choices: choices
+        })
+        log_info(`Selected device: ${selectedDevice}`)
+
+        // Prefer OOM Killer from terminating Termux
+        log_info("Fix Process OOM Killer..")
+        await $`adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent"`
+        await $`adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"`
+        await $`adb shell settings put global settings_enable_monitor_phantom_procs false`
+
+        log_info("Updating Termux..")
+        await question("Press Enter to Continue..")
+        process.env.COMMAND = "pkg update -y"; await termuxRun()
+        process.env.COMMAND = "pkg install openssh proot proot-distro -y"; await termuxRun()
+        process.env.COMMAND = "proot-distro install archlinux || true"; await termuxRun()
+        process.env.COMMAND = "proot-distro login archlinux -- pacman -Syu --noconfirm"; await termuxRun()
+        process.env.COMMAND = "proot-distro login archlinux -- pacman -Sy --noconfirm unzip base-devel git github-cli neovim nss libxss tmux neovim lsof nodejs npm ripgrep python dnsutils xfce4 xdg-utils"; await termuxRun()
+        process.env.COMMAND = "proot-distro login archlinux -- useradd -m arch || true"; await termuxRun()
+        log_warn("Run the following command to enable sudo for the arch user")
+        log_warn("proot-distro login archlinux; echo 'arch ALL=(ALL) ALL' >> /etc/sudoers")
+        // process.env.COMMAND = "proot-distro login archlinux -- git clone https://aur.archlinux.org/visual-studio-code-bin.git; cd visual-studio-code-bin; makepkg -si"; await termuxRun()
+        // rm -r /home/arch/.config/Code/Cache /home/arch/.config/Code/CachedData/
     }
 }
 
