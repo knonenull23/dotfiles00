@@ -215,11 +215,49 @@ class x64UbuntuInstaller extends Installer {
     }
 }
 
+class Arm64ArchInstaller extends Installer {
+    async fileEditingAndManipulation(): Promise<void> {
+    }
+
+    async openSshServer(): Promise<void> {
+    }
+
+    async githubCli(): Promise<void> {
+    }
+
+    async vsCodeEditor(): Promise<void> {
+    }
+
+    async neovim(): Promise<void> {
+    }
+
+
+    async guacamole(): Promise<void> {
+    }
+
+    async filebrowser(): Promise<void> {
+    }
+
+    async docker(): Promise<void> {
+    }
+
+    async kubernetes(): Promise<void> {
+    }
+
+    async termux(): Promise<void> {
+    }
+}
+
 export function getOperatingSystem(): OperatingSystem {
     const osRelease = fs.readFileSync('/etc/os-release', 'utf8')
     if (osRelease.includes("Ubuntu")) {
         log_info(`Operating system: Ubuntu`)
         return OperatingSystem.Linux_Ubuntu;
+    }
+
+    if (osRelease.includes("Arch")) {
+        log_info(`Operating system: Arch`)
+        return OperatingSystem.Linux_Arch;
     }
 
     throw new Error("Unsupported operating system")
@@ -232,6 +270,11 @@ export function getCpuArchitecture(): CpuArchitecture {
         return CpuArchitecture.x86_64
     }
 
+    if (cpuInfo.includes("arm64")) {
+        log_info(`Operating system: Arm64`)
+        return CpuArchitecture.arm64
+    }
+
     throw new Error("Unsupported CPU architecture")
 }
 
@@ -240,6 +283,9 @@ export function getInstaller(): Installer {
     const _arch = getCpuArchitecture()
     if (_arch === CpuArchitecture.x86_64 && _os === OperatingSystem.Linux_Ubuntu) {
         return new x64UbuntuInstaller()
+    }
+    if (_arch === CpuArchitecture.arm64 && _os === OperatingSystem.Linux_Arch) {
+        return new Arm64ArchInstaller()
     }
 
     throw new Error("Installer not implemented.")
