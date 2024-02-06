@@ -281,7 +281,7 @@ class Arm64ArchInstaller extends Installer {
 
     async filebrowser(): Promise<void> {
         log_info("Installing FileBrowser on Arch")
-        await $`curl - fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash`
+        await $`curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash`
     }
 
     async docker(): Promise<void> {
