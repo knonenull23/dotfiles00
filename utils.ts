@@ -209,14 +209,13 @@ class x64UbuntuInstaller extends Installer {
         process.env.COMMAND = "proot-distro login archlinux -- useradd -m arch || true"; await termuxRun()
         log_warn("Run the following command to enable sudo for the arch user")
         log_warn("proot-distro login archlinux; echo 'arch ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers")
-        // rm -r /home/arch/.config/Code/Cache /home/arch/.config/Code/CachedData/
     }
 }
 
 class Arm64ArchInstaller extends Installer {
     async fileEditingAndManipulation(): Promise<void> {
         log_info("Installing file editing and manipulation capabilities on Arch")
-        await $`sudo pacman -Sy --noconfirm unzip base-devel git nss libxss tmux lsof ripgrep python dnsutils`
+        await $`sudo pacman -Sy --noconfirm unzip wget base-devel git nss libxss tmux lsof ripgrep python dnsutils`
     }
 
     async openSshServer(): Promise<void> {
@@ -246,24 +245,25 @@ class Arm64ArchInstaller extends Installer {
 
     async guacamole(): Promise<void> {
         log_info("Installing Guacamole on Arch")
-        // await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
+        await $`sudo pacman -Sy --noconfirm cairo wget libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2 chromium`
 
-        // await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
-        // cd("/tmp")
-        // await $`git clone https://aur.archlinux.org/uuid.git`
-        // cd("/tmp/uuid")
-        // await $`yes | makepkg -si`
+        await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
+        cd("/tmp")
+        await $`git clone https://aur.archlinux.org/uuid.git`
+        cd("/tmp/uuid")
+        await $`yes | makepkg -si`
 
-        // await $`mkdir -p /etc/guacamole`
-        // await $`if [ -d /tmp/guacamole-server ]; then rm -rf /tmp/guacamole-server; fi`
-        // cd("/tmp")
-        // await $`git clone https://www.github.com/apache/guacamole-server.git`
-        // cd("/tmp/guacamole-server")
-        // await $`autoreconf -fi`
-        // await $`./configure --with-init-dir=/etc/init.d`
-        // await $`make`
-        // await $`sudo make install`
-        // await $`sudo ldconfig`
+        await $`mkdir -p /etc/guacamole`
+        await $`mkdir -p ${os.homedir()}/.vnc`
+        await $`if [ -d /tmp/guacamole-server ]; then rm -rf /tmp/guacamole-server; fi`
+        cd("/tmp")
+        await $`git clone https://www.github.com/apache/guacamole-server.git`
+        cd("/tmp/guacamole-server")
+        await $`autoreconf -fi`
+        await $`./configure --with-init-dir=/etc/init.d`
+        await $`make`
+        await $`sudo make install`
+        await $`sudo ldconfig`
 
         await $`wget https://archive.apache.org/dist/guacamole/1.5.3/binary/guacamole-1.5.3.war`
         await $`sudo mv guacamole-1.5.3.war /usr/share/tomcat9/webapps/guacamole.war`
@@ -273,9 +273,10 @@ class Arm64ArchInstaller extends Installer {
         await $`sudo cp conf/guacamole-termux/vnc.config ${os.homedir()}/.vnc/config`
 
         log_warn("Set VNC Password: vncpasswd")
-        log_info("Start Tomcat: /uyr/share/tomcat9/bin/startup.sh")
+        log_info("Start Tomcat: /usr/share/tomcat9/bin/startup.sh")
         log_info("Start VNC Server: vncserver :1")
         log_info("Start Guacd: guacd")
+        log_info("Clear VSCode Cache: rm -r /home/arch/.config/Code/Cache /home/arch/.config/Code/CachedData/")
     }
 
     async filebrowser(): Promise<void> {
