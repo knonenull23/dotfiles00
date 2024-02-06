@@ -234,26 +234,52 @@ class Arm64ArchInstaller extends Installer {
         cd("/tmp")
         await $`git clone https://aur.archlinux.org/visual-studio-code-bin.git`
         cd("/tmp/visual-studio-code-bin")
-        await $`makepkg -si`
+        await $`yes | makepkg -si`
+        log_warn("Run the following command to launch vscode:")
+        log_warn("code --no-sandbox")
     }
 
     async neovim(): Promise<void> {
+        await $`pacman -Sy --noconfirm neovim`
     }
 
 
     async guacamole(): Promise<void> {
+        log_info("Installing Guacamole on Arch")
+        await $`sudo pacman -sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
+
+        await $`[ -d /tmp/uuid ] && rm -rf /tmp/uuid`
+        cd("/tmp")
+        await $`git clone https://aur.archlinux.org/uuid.git`
+        cd("/tmp/uuid")
+        await $`yes | makepkg -si`
+
+        await $`[ -d /tmp/guacamole-server ] && rm -rf /tmp/guacamole-server`
+        cd("/tmp")
+        await $`git clone https://www.github.com/apache/guacamole-server.git`
+        cd("/tmp/guacamole-server")
+        await $`autoreconf -fi`
+        await $`.config --with-init-dir=/etc/init.d`
+        await $`make`
+        await $`sudo make install`
+        await $`sudo ldconfig`
     }
 
     async filebrowser(): Promise<void> {
+        log_info("Installing FileBrowser on Arch")
+        await $`curl - fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash`
     }
 
     async docker(): Promise<void> {
+        throw new Error("Method not implemented.")
     }
 
     async kubernetes(): Promise<void> {
+        throw new Error("Method not implemented.")
     }
 
     async termux(): Promise<void> {
+        throw new Error("Method not implemented.")
     }
 }
 
