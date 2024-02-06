@@ -230,7 +230,10 @@ class Arm64ArchInstaller extends Installer {
 
     async vsCodeEditor(): Promise<void> {
         log_info("Installing VS Code Editor on Arch")
-        await $`git clone https://aur.archlinux.org/visual-studio-code-bin.git; cd visual-studio-code-bin; makepkg -si"`
+        cd("/tmp")
+        await $`git clone https://aur.archlinux.org/visual-studio-code-bin.git`
+        cd("/tmp/visual-studio-code-bin")
+        await $`makepkg -si"`
     }
 
     async neovim(): Promise<void> {
