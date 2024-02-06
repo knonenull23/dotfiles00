@@ -256,6 +256,10 @@ require('lazy').setup({
                 servers['pyright'] = {}
             end
 
+            if vim.fn.executable 'node' == 1 then
+                servers['tsserver'] = {}
+            end
+
             if vim.fn.executable 'bash' == 1 then
                 servers['bashls'] = {}
             end
