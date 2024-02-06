@@ -218,7 +218,7 @@ class Arm64ArchInstaller extends Installer {
     async fileEditingAndManipulation(): Promise<void> {
         log_info("Installing file editing and manipulation capabilities on Arch")
         // await $`pacman -Sy --noconfirm unzip base-devel git github-cli neovim nss libxss tmux lsof nodejs npm ripgrep python dnsutils xfce4 xdg-utils`
-        await $`pacman -Sy --noconfirm unzip base-devel git github-cli nss libxss tmux lsof ripgrep python dnsutils`
+        await $`sudo pacman -Sy --noconfirm unzip base-devel git github-cli nss libxss tmux lsof ripgrep python dnsutils`
     }
 
     async openSshServer(): Promise<void> {
