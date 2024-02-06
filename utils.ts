@@ -246,26 +246,26 @@ class Arm64ArchInstaller extends Installer {
 
     async guacamole(): Promise<void> {
         log_info("Installing Guacamole on Arch")
-        await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
+        // await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
 
-        await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
-        cd("/tmp")
-        await $`git clone https://aur.archlinux.org/uuid.git`
-        cd("/tmp/uuid")
-        await $`yes | makepkg -si`
+        // await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
+        // cd("/tmp")
+        // await $`git clone https://aur.archlinux.org/uuid.git`
+        // cd("/tmp/uuid")
+        // await $`yes | makepkg -si`
 
-        await $`mkdir -p /etc/guacamole`
-        await $`if [ -d /tmp/guacamole-server ]; then rm -rf /tmp/guacamole-server; fi`
-        cd("/tmp")
-        await $`git clone https://www.github.com/apache/guacamole-server.git`
-        cd("/tmp/guacamole-server")
-        await $`autoreconf -fi`
-        await $`./configure --with-init-dir=/etc/init.d`
-        await $`make`
-        await $`sudo make install`
-        await $`sudo ldconfig`
+        // await $`mkdir -p /etc/guacamole`
+        // await $`if [ -d /tmp/guacamole-server ]; then rm -rf /tmp/guacamole-server; fi`
+        // cd("/tmp")
+        // await $`git clone https://www.github.com/apache/guacamole-server.git`
+        // cd("/tmp/guacamole-server")
+        // await $`autoreconf -fi`
+        // await $`./configure --with-init-dir=/etc/init.d`
+        // await $`make`
+        // await $`sudo make install`
+        // await $`sudo ldconfig`
 
-        await $`wget https://archive.apache.org/dist/guacamole/$VER/binary/guacamole-1.5.3.war`
+        await $`wget https://archive.apache.org/dist/guacamole/1.5.3/binary/guacamole-1.5.3.war`
         await $`sudo mv guacamole-1.5.3.war /usr/share/tomcat9/webapps/guacamole.war`
 
         await $`sudo cp conf/guacamole-termux/guacamole.properties /etc/guacamole/guacamole.properties`
