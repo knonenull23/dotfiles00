@@ -1,11 +1,11 @@
-# unzip nvim.zip into /opt/nvim
+# unzip nvim.zip into $HOME/.nvim
 # unzip node into /opt/node
 # Save in .bashrc:
 # export PATH=$PATH:/opt/node/bin
 # alias nvim="/opt/nvim/squashfs-root/AppRun"
 
-ln -s /opt/nvim/config/nvim/ $HOME/.config/
-ln -s /opt/nvim/share/nvim/ $HOME/.local/share/
+ln -s $HOME/.nvim/config/nvim/ $HOME/.config/
+ln -s $HOME/.nvim/share/nvim/ $HOME/.local/share/
 
 # fix symlinks
 rm $HOME/.local/share/nvim/mason/bin/*
