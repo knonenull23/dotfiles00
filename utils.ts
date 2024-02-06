@@ -248,12 +248,13 @@ class Arm64ArchInstaller extends Installer {
         log_info("Installing Guacamole on Arch")
         // await $`sudo pacman -Sy --noconfirm cairo libpng tomcat9 tomcat-native libvncserver tigervnc unzip freerdp libssh2`
 
-        await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
-        cd("/tmp")
-        await $`git clone https://aur.archlinux.org/uuid.git`
-        cd("/tmp/uuid")
-        await $`yes | makepkg -si`
+        // await $`if [ -d /tmp/uuid ]; then rm -rf /tmp/uuid; fi`
+        // cd("/tmp")
+        // await $`git clone https://aur.archlinux.org/uuid.git`
+        // cd("/tmp/uuid")
+        // await $`yes | makepkg -si`
 
+        await $`mkdir -p /etc/guacamole`
         await $`if [ -d /tmp/guacamole-server ]; then rm -rf /tmp/guacamole-server; fi`
         cd("/tmp")
         await $`git clone https://www.github.com/apache/guacamole-server.git`
@@ -263,6 +264,9 @@ class Arm64ArchInstaller extends Installer {
         await $`make`
         await $`sudo make install`
         await $`sudo ldconfig`
+
+        await $`wget https://archive.apache.org/dist/guacamole/$VER/binary/guacamole-1.5.3.war`
+        await $`sudo mv guacamole-1.5.3.war /usr/share/tomcat9/webapps/guacamole.war`
 
         await $`sudo cp conf/guacamole-termux/guacamole.properties /etc/guacamole/guacamole.properties`
         await $`sudo cp conf/guacamole-termux/user-mapping.xml /etc/guacamole/user-mapping.xml`
