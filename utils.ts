@@ -28,6 +28,7 @@ abstract class Installer {
     abstract openSshServer(): Promise<void>
     abstract githubCli(): Promise<void>
     abstract vsCodeEditor(): Promise<void>
+    abstract neovim(): Promise<void>
     abstract guacamole(): Promise<void>
     abstract filebrowser(): Promise<void>
     abstract docker(): Promise<void>
