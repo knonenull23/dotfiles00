@@ -206,7 +206,6 @@ class x64UbuntuInstaller extends Installer {
         process.env.COMMAND = "pkg install openssh proot proot-distro -y"; await termuxRun()
         process.env.COMMAND = "proot-distro install archlinux || true"; await termuxRun()
         process.env.COMMAND = "proot-distro login archlinux -- pacman -Syu --noconfirm"; await termuxRun()
-        process.env.COMMAND = "proot-distro login archlinux -- pacman -Sy --noconfirm unzip base-devel git github-cli neovim nss libxss tmux neovim lsof nodejs npm ripgrep python dnsutils xfce4 xdg-utils"; await termuxRun()
         process.env.COMMAND = "proot-distro login archlinux -- useradd -m arch || true"; await termuxRun()
         log_warn("Run the following command to enable sudo for the arch user")
         log_warn("proot-distro login archlinux; echo 'arch ALL=(ALL) ALL' >> /etc/sudoers")
@@ -217,6 +216,9 @@ class x64UbuntuInstaller extends Installer {
 
 class Arm64ArchInstaller extends Installer {
     async fileEditingAndManipulation(): Promise<void> {
+        log_info("Installing file editing and manipulation capabilities on Arch")
+        // await $`pacman -Sy --noconfirm unzip base-devel git github-cli neovim nss libxss tmux lsof nodejs npm ripgrep python dnsutils xfce4 xdg-utils`
+        await $`pacman - Sy --noconfirm unzip base-devel git github-cli nss libxss tmux lsof ripgrep python dnsutils`
     }
 
     async openSshServer(): Promise<void> {
