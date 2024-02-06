@@ -236,6 +236,11 @@ class Arm64ArchInstaller extends Installer {
         await $`yes | makepkg -si`
         log_warn("Run the following command to launch vscode:")
         log_warn("code --no-sandbox")
+
+        const extensions = fs.readJsonSync('conf/vscode/extensions.json')
+        for (const extension of extensions['extensions']) {
+            await $`code --install-extension ${extension}`
+        }
     }
 
     async neovim(): Promise<void> {
