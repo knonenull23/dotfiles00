@@ -263,6 +263,10 @@ class Arm64ArchInstaller extends Installer {
         await $`make`
         await $`sudo make install`
         await $`sudo ldconfig`
+
+        await $`sudo cp conf/guacamole-termux/guacamole.properties /etc/guacamole/guacamole.properties`
+        await $`sudo cp conf/guacamole-termux/user-mapping.xml /etc/guacamole/user-mapping.xml`
+        await $`sudo cp conf/guacamole-termux/vnc.config ${os.homedir()}/.vnc/config`
     }
 
     async filebrowser(): Promise<void> {
