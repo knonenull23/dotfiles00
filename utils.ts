@@ -89,6 +89,8 @@ class x64UbuntuInstaller extends Installer {
 
     async neovim(): Promise<void> {
         log_info("Installing Neovim on Ubuntu")
+        await $`sudo apt update`
+        await $`sudo apt install -y ripgrep`
         await $`mkdir -p ${os.homedir()}/.nvim; mkdir -p ${os.homedir()}/.config; mkdir -p ${os.homedir()}/.local/share`
         await $`mkdir -p ${os.homedir()}/.nvim/config/nvim; ln -sf ${os.homedir()}/.nvim/config/nvim ${os.homedir()}/.config`
         await $`mkdir -p ${os.homedir()}/.nvim/share/nvim; ln -sf ${os.homedir()}/.nvim/share/nvim ${os.homedir()}/.local/share`
@@ -244,7 +246,7 @@ class Arm64ArchInstaller extends Installer {
     }
 
     async neovim(): Promise<void> {
-        await $`sudo pacman -Sy --noconfirm neovim nodejs npm`
+        await $`sudo pacman -Sy --noconfirm neovim`
         await $`mkdir ${os.homedir()}/.config/nvim`
         await $`cp conf/vim/init.lua ${os.homedir()}/.config/nvim/init.lua`
     }
