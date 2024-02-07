@@ -249,6 +249,10 @@ class Arm64ArchInstaller extends Installer {
         await $`sudo pacman -Sy --noconfirm neovim`
         await $`mkdir ${os.homedir()}/.config/nvim`
         await $`cp conf/vim/init.lua ${os.homedir()}/.config/nvim/init.lua`
+
+        await $`curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh -o /tmp/get-nvm.bash; bash /tmp/get-nvm.bash`
+        log_warn("Run the following command before running nvim to install all the plugins")
+        log_warn("source ~/.bashrc; nvm install --lts; nvim use --lts")
     }
 
 
