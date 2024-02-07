@@ -45,7 +45,7 @@ class x64UbuntuInstaller extends Installer {
     async fileEditingAndManipulation(): Promise<void> {
         log_info("Installing file editing and manipulation capabilities on Ubuntu")
         await $`sudo apt update`
-        await $`sudo apt install -y vim wget curl git zip unzip dnsutils lsof`
+        await $`sudo apt install -y vim wget curl git zip unzip dnsutils lsof jq`
         await $`sudo apt -y autoremove`
     }
 
@@ -217,7 +217,7 @@ class x64UbuntuInstaller extends Installer {
 class Arm64ArchInstaller extends Installer {
     async fileEditingAndManipulation(): Promise<void> {
         log_info("Installing file editing and manipulation capabilities on Arch")
-        await $`sudo pacman -Sy --noconfirm unzip wget base-devel git nss libxss tmux lsof ripgrep python dnsutils`
+        await $`sudo pacman -Sy --noconfirm unzip wget base-devel git nss libxss tmux lsof ripgrep python dnsutils jq`
     }
 
     async openSshServer(): Promise<void> {

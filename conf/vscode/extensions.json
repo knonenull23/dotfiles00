@@ -8,6 +8,7 @@
         "github.copilot",
         "ms-vscode.remote-explorer",
         "vscodevim.vim",
+        "hediet.vscode-drawio",
         "ms-vscode.remote-server",
         "ms-vscode.vscode-typescript-next"
     ]
