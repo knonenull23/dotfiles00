@@ -60,6 +60,10 @@
         "command": "workbench.action.findInFiles"
     },
     {
+        "key": "alt+shift+g",
+        "command": "workbench.action.showAllSymbols"
+    },
+    {
         "key": "alt+r",
         "command": "workbench.action.terminal.runRecentCommand",
     },

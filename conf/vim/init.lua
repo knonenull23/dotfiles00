@@ -121,9 +121,9 @@ require('lazy').setup({
 
             vim.keymap.set('n', '<A-p>', require('telescope.builtin').find_files,
                 { desc = '[S]earch [F]iles' })
-            vim.keymap.set('n', '<A-F>', require('telescope.builtin').live_grep,
+            vim.keymap.set('n', '<A-g>', require('telescope.builtin').live_grep,
                 { desc = '[S]earch by [G]rep' })
-            vim.keymap.set('n', '<A-P>', require('telescope.builtin').lsp_workspace_symbols,
+            vim.keymap.set('n', '<A-G>', require('telescope.builtin').lsp_workspace_symbols,
                 { desc = '[S]earch Workspace Symbols' })
             vim.keymap.set('n', '<A-h>', require('telescope.builtin').diagnostics,
                 { desc = '[S]earch [D]iagnostics' })
