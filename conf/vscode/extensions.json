@@ -11,6 +11,7 @@
         "hediet.vscode-drawio",
         "ms-vscode.remote-server",
         "ms-vscode.vscode-typescript-next",
-        "cweijan.vscode-office"
+        "cweijan.vscode-office",
+        "4ops.terraform"
     ]
 }
