@@ -89,5 +89,17 @@
     {
         "key": "alt+z",
         "command": "workbench.action.toggleMaximizeEditorGroup"
-    }
+    },
+    {
+        "key": "alt+.",
+        "command": "editor.action.quickFix"
+    },
+    {
+        "key": "alt+[",
+        "command": "editor.action.marker.prev"
+    },
+    {
+        "key": "alt+]",
+        "command": "editor.action.marker.next"
+    },
 ]
