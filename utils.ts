@@ -37,6 +37,7 @@ abstract class Installer {
     abstract guacamole(): Promise<void>
     abstract filebrowser(): Promise<void>
     abstract docker(): Promise<void>
+    abstract ansible(): Promise<void>
     abstract kubernetes(): Promise<void>
     abstract termux(): Promise<void>
 }
@@ -158,6 +159,13 @@ class x64UbuntuInstaller extends Installer {
     async docker(): Promise<void> {
         await $`curl -fsSL https://get.docker.com -o /tmp/get-docker.sh; sh /tmp/get-docker.sh`
         await $`sudo usermod -aG docker ${os.userInfo().username}`
+    }
+
+    async ansible(): Promise<void> {
+        await $`sudo apt update`
+        await $`sudo apt install -y software-properties-common`
+        await $`sudo apt-add-repository --yes --update ppa:ansible/ansible`
+        await $`sudo apt install -y ansible ansible-lint`
     }
 
     async kubernetes(): Promise<void> {

@@ -24,6 +24,7 @@ const choices = await checkbox({
         { name: 'Guacamole', value: 'guacamole' },
         { name: 'FileBrowser', value: 'filebrowser' },
         { name: 'Docker', value: 'docker' },
+        { name: 'Ansible', value: 'ansible' },
         { name: 'Kubernetes', value: 'kubernetes' },
         new Separator("External Device"),
         { name: 'Bootstrap Termux', value: 'termux' },
@@ -58,6 +59,9 @@ for (const choice of choices) {
             break;
         case 'docker':
             await install.docker()
+            break;
+        case 'ansible':
+            await install.ansible()
             break;
         case 'kubernetes':
             await install.kubernetes()
