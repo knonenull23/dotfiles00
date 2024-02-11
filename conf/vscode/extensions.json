@@ -12,6 +12,7 @@
         "ms-vscode.remote-server",
         "ms-vscode.vscode-typescript-next",
         "cweijan.vscode-office",
-        "4ops.terraform"
+        "4ops.terraform",
+        "redhat.ansible"
     ]
 }
