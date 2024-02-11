@@ -203,6 +203,7 @@ require('lazy').setup({
             vim.keymap.set('n', '<A-[>', vim.diagnostic.goto_prev,
                 { desc = 'Go to previous diagnostic message' })
             vim.keymap.set('n', '<A-]>', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+            vim.keymap.set('n', '<A-.>', vim.lsp.buf.code_action, { desc = 'Fix Code Diagnostic' })
             vim.keymap.set('n', '[[', vim.diagnostic.open_float,
                 { desc = 'Open floating diagnostic message' })
             vim.keymap.set('n', ']]', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
@@ -216,7 +217,6 @@ require('lazy').setup({
                     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
                 end
                 nmap('rn', vim.lsp.buf.rename, '[R]e[n]ame')
-                nmap('ga', vim.lsp.buf.code_action, '[C]ode [A]ction')
                 nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
                 nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
                 nmap('gT', vim.lsp.buf.type_definition, 'Type [D]efinition')
