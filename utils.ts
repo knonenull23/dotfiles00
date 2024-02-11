@@ -165,7 +165,8 @@ class x64UbuntuInstaller extends Installer {
         await $`sudo apt update`
         await $`sudo apt install -y software-properties-common`
         await $`sudo apt-add-repository --yes --update ppa:ansible/ansible`
-        await $`sudo apt install -y ansible ansible-lint`
+        await $`sudo apt install -y ansible python3-pip`
+        await $`pip3 install --user ansible-lint`
     }
 
     async kubernetes(): Promise<void> {
