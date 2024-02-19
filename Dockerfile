@@ -24,6 +24,8 @@ chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 mv squashfs-root /opt/nvim
 ln -s /opt/nvim/AppRun /usr/bin/nvim
-nvim --headless "+Lazy! sync" +qa
-nvim +"LspInstall tsserver bashls lua_ls yamlls pyright" +qa
+if [ "$SKIP_NODEJS" ]; then 
+    nvim --headless "+Lazy! sync" +qa
+else
+\. /root/.nvm/nvm.sh && nvim +"LspInstall tsserver bashls yamlls pyright" +qa
 EOF
