@@ -65,7 +65,7 @@
     },
     {
         "key": "alt+r",
-        "command": "workbench.action.terminal.runRecentCommand",
+        "command": "workbench.action.terminal.runRecentCommand"
     },
     {
         "key": "alt+e",
@@ -101,5 +101,5 @@
     {
         "key": "alt+]",
         "command": "editor.action.marker.next"
-    },
+    }
 ]
