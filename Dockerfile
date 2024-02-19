@@ -27,6 +27,6 @@ ln -s /opt/nvim/AppRun /usr/bin/nvim
 if [ "$SKIP_NODEJS" ]; then 
     nvim --headless "+Lazy! sync" +qa
 else
-\. /root/.nvm/nvm.sh && nvim +"LspInstall tsserver bashls yamlls pyright" +qa
+\. /root/.nvm/nvm.sh && nvim +"LspInstall tsserver bashls yamlls pyright lua_ls" +qa
 fi
 EOF

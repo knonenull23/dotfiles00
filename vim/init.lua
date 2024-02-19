@@ -235,18 +235,18 @@ require('lazy').setup({
             local servers = {}
 
             if vim.fn.executable 'npm' == 1 then
-                -- servers['lua_ls'] = {
-                --     Lua = {
-                --         workspace = { checkThirdParty = false },
-                --         telemetry = { enable = false },
-                --         diagnostics = {
-                --             globals = {
-                --                 'vim',
-                --                 'require'
-                --             }
-                --         }
-                --     },
-                -- }
+                servers['lua_ls'] = {
+                    Lua = {
+                        workspace = { checkThirdParty = false },
+                        telemetry = { enable = false },
+                        diagnostics = {
+                            globals = {
+                                'vim',
+                                'require'
+                            }
+                        }
+                    },
+                }
 
                 servers['yamlls'] = {
                     yaml = {
