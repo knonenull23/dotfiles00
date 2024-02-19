@@ -16,6 +16,7 @@ sudo usermod -aG docker $USER
 # Github CLI
 sudo apt install gh -y
 gh auth login
+cp misc/gitconfig $HOME/.gitconfig
 
 # VSCode
 curl -L -o /tmp/code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" && sudo dpkg -i code.deb

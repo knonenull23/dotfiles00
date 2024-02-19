@@ -4,6 +4,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+vim.g.installRun = false 
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system {
         'git',
@@ -13,6 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
         '--branch=stable',
         lazypath,
     }
+
+    vim.g.installRun = true
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -231,43 +234,45 @@ require('lazy').setup({
 
             local servers = {}
 
-            servers['lua_ls'] = {
-                Lua = {
-                    workspace = { checkThirdParty = false },
-                    telemetry = { enable = false },
-                    diagnostics = {
-                        globals = {
-                            'vim',
-                            'require'
+            if vim.fn.executable 'npm' == 1 then
+                servers['lua_ls'] = {
+                    Lua = {
+                        workspace = { checkThirdParty = false },
+                        telemetry = { enable = false },
+                        diagnostics = {
+                            globals = {
+                                'vim',
+                                'require'
+                            }
+                        }
+                    },
+                }
+
+                servers['yamlls'] = {
+                    yaml = {
+                        schemas = {
+                            kubernetes = "*.k8s.yaml",
+                            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] =
+                            "*.cf.yaml"
                         }
                     }
-                },
-            }
-
-            servers['yamlls'] = {
-                yaml = {
-                    schemas = {
-                        kubernetes = "*.k8s.yaml",
-                        ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] =
-                        "*.cf.yaml"
-                    }
                 }
-            }
 
-            if vim.fn.executable 'python' == 1 then
-                servers['pyright'] = {}
-            end
+                if vim.fn.executable 'python' == 1 then
+                    servers['pyright'] = {}
+                end
 
-            if vim.fn.executable 'node' == 1 then
-                servers['tsserver'] = {}
-            end
+                if vim.fn.executable 'node' == 1 then
+                    servers['tsserver'] = {}
+                end
 
-            if vim.fn.executable 'bash' == 1 then
-                servers['bashls'] = {}
-            end
+                if vim.fn.executable 'bash' == 1 then
+                    servers['bashls'] = {}
+                end
 
-            if vim.fn.executable 'clangd' == 1 then
-                servers['clangd'] = {}
+                if vim.fn.executable 'clangd' == 1 then
+                    servers['clangd'] = {}
+                end
             end
 
             mason_lspconfig.setup {
@@ -421,6 +426,10 @@ require('lazy').setup({
         end
     }
 }, {})
+
+if vim.g.installRun then
+    require('lazy').sync({wait = true})
+end
 
 vim.cmd [[colorscheme onedark]]
 vim.o.hlsearch = true
