@@ -1,5 +1,5 @@
 -- config folder: $HOME/.config/nvim OR $HOME\AppData\Local\nvim
--- requires ripgrep, npm, git, node, python, cmake, gcc, clangd
+-- requires ripgrep, npm, git, node, python, cmake, gcc 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -270,9 +270,6 @@ require('lazy').setup({
                     servers['bashls'] = {}
                 end
 
-                if vim.fn.executable 'clangd' == 1 then
-                    servers['clangd'] = {}
-                end
             end
 
             mason_lspconfig.setup {

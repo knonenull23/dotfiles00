@@ -25,5 +25,5 @@ chmod u+x nvim.appimage
 mv squashfs-root /opt/nvim
 ln -s /opt/nvim/AppRun /usr/bin/nvim
 nvim --headless "+Lazy! sync" +qa
-nvim +"LspInstall tsserver bashls lua_ls yamlls pyright clangd" +qa
+nvim +"LspInstall tsserver bashls lua_ls yamlls pyright" +qa
 EOF
