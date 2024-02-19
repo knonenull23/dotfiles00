@@ -18,7 +18,7 @@ if [ "$SKIP_NEOVIM" ]; then exit; fi
 
 echo "Installing Neovim.." 
 apt update
-apt install -y ripgrep curl git build-essential python3
+apt install -y ripgrep curl git build-essential python3 unzip
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
