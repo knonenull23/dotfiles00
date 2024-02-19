@@ -28,5 +28,9 @@ cat vscode/extensions | xargs -I{} code --install-extension {}
 ### Set up Development Containers
 
 ```
-docker build --build-arg INSTALL_NEOVIM=y --progress plain -t dev .
+# Build all
+docker build --progress plain -t dev .
+
+# Skip certain modules
+docker build --build-arg SKIP_NEOVIM=y --progress plain -t dev .
 ```
