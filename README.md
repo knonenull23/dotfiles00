@@ -7,7 +7,6 @@ Various configuration and setup files.
 ```
 # Basics
 sudo apt install git curl chromium-browser -y
-sudo snap install chromium
 
 # Docker
 curl -fsSL https://get.docker.com | bash -
