@@ -37,5 +37,5 @@ docker build --progress plain -t dev .
 docker build --build-arg SKIP_NEOVIM=y --progress plain -t dev .
 
 # Run
-docker run -it --rm -v workspaces:/workspaces dev bash
+docker run --name dev -it --rm -v workspaces:/workspaces dev bash
 ```
