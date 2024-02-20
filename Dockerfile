@@ -5,7 +5,7 @@ ARG SKIP_NEOVIM
 
 COPY misc/.gitconfig misc/.* /root/
 RUN apt update && \
-    apt install -y tmux curl git
+    apt install -y tmux curl git iputils-ping dnsutils openssl
 
 RUN if [ "$SKIP_NODEJS" ]; then exit; fi && \
     echo "Installing NodeJS.." && \
