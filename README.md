@@ -28,6 +28,8 @@ cat vscode/extensions | xargs -I{} code --install-extension {}
 ### Set up Development Containers
 
 ```
+# Create hidden versions of config files in .misc [optional]
+
 # Build all
 docker build --progress plain -t dev .
 

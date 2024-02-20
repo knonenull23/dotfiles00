@@ -1,0 +1,2 @@
+# @my-organization:registry=https://my-private-registry.com
+# my-custom-package:registry=https://another-registry.com
