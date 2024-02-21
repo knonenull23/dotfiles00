@@ -23,6 +23,7 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage  && \
     chmod u+x nvim.appimage && \
     ./nvim.appimage --appimage-extract && \
+    rm nvim.appimage && \
     mv squashfs-root /opt/nvim && \
     ln -s /opt/nvim/AppRun /usr/bin/nvim && \
     if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa"; fi
