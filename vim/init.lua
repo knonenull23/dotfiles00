@@ -445,13 +445,13 @@ require('lazy').setup({
                 desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
             },
             {
-                "<A-i>",
+                "<A-C>",
                 ":CopilotChatVisual",
                 mode = "x",
                 desc = "CopilotChat - Open in vertical split",
             },
             {
-                "<A-C>",
+                "<A-i>",
                 ":CopilotChatInPlace<cr>",
                 mode = "x",
                 desc = "CopilotChat - Run in-place code",
