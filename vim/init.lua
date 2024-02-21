@@ -258,6 +258,8 @@ require('lazy').setup({
                     }
                 }
 
+		servers['jsonls'] = {}
+
                 if vim.fn.executable 'python' == 1 then
                     servers['pyright'] = {}
                 end
