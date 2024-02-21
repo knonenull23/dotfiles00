@@ -1,9 +1,10 @@
 -- config folder: $HOME/.config/nvim OR $HOME\AppData\Local\nvim
--- requires ripgrep, npm, git, node, python, cmake, gcc, clangd
+-- requires ripgrep, npm, git, node, python, cmake, gcc
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+vim.g.installRun = false
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system {
         'git',
@@ -13,6 +14,8 @@ if not vim.loop.fs_stat(lazypath) then
         '--branch=stable',
         lazypath,
     }
+
+    vim.g.installRun = true
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -231,43 +234,43 @@ require('lazy').setup({
 
             local servers = {}
 
-            servers['lua_ls'] = {
-                Lua = {
-                    workspace = { checkThirdParty = false },
-                    telemetry = { enable = false },
-                    diagnostics = {
-                        globals = {
-                            'vim',
-                            'require'
+            if vim.fn.executable 'npm' == 1 then
+                servers['lua_ls'] = {
+                    Lua = {
+                        workspace = { checkThirdParty = false },
+                        telemetry = { enable = false },
+                        diagnostics = {
+                            globals = {
+                                'vim',
+                                'require'
+                            }
+                        }
+                    },
+                }
+
+                servers['yamlls'] = {
+                    yaml = {
+                        schemas = {
+                            kubernetes = "*.k8s.yaml",
+                            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] =
+                            "*.cf.yaml"
                         }
                     }
-                },
-            }
-
-            servers['yamlls'] = {
-                yaml = {
-                    schemas = {
-                        kubernetes = "*.k8s.yaml",
-                        ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] =
-                        "*.cf.yaml"
-                    }
                 }
-            }
 
-            if vim.fn.executable 'python' == 1 then
-                servers['pyright'] = {}
-            end
+		servers['jsonls'] = {}
 
-            if vim.fn.executable 'node' == 1 then
-                servers['tsserver'] = {}
-            end
+                if vim.fn.executable 'python' == 1 then
+                    servers['pyright'] = {}
+                end
 
-            if vim.fn.executable 'bash' == 1 then
-                servers['bashls'] = {}
-            end
+                if vim.fn.executable 'node' == 1 then
+                    servers['tsserver'] = {}
+                end
 
-            if vim.fn.executable 'clangd' == 1 then
-                servers['clangd'] = {}
+                if vim.fn.executable 'bash' == 1 then
+                    servers['bashls'] = {}
+                end
             end
 
             mason_lspconfig.setup {
@@ -413,14 +416,60 @@ require('lazy').setup({
     {
         'github/copilot.vim',
         config = function()
-            vim.keymap.set('i', '<A-i>', 'copilot#Accept("\\<CR>")', {
+            vim.keymap.set('i', '<A-space>', 'copilot#Accept("\\<CR>")', {
                 expr = true,
                 replace_keycodes = false
             })
             vim.g.copilot_no_tab_map = true
         end
-    }
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        opts = {
+            show_help = "yes",         -- Show help text for CopilotChatInPlace, default: yes
+            debug = false,             -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
+            disable_extra_info = 'no', -- Disable extra information (e.g: system prompt) in the response.
+            language =
+            "English"                  -- Copilot answer language settings when using default prompts. Default language is English.
+            -- proxy = "socks5://127.0.0.1:3000", -- Proxies requests via https or socks.
+            -- temperature = 0.1,
+        },
+        build = function()
+            vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+        end,
+        event = "VeryLazy",
+        keys = {
+            { "<A-I>", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+            { "<A-O>", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
+            {
+                "<A-c>",
+                "<cmd>CopilotChatVsplitToggle<cr>",
+                desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
+            },
+            {
+                "<A-C>",
+                ":CopilotChatVisual",
+                mode = "x",
+                desc = "CopilotChat - Open in vertical split",
+            },
+            {
+                "<A-i>",
+                ":CopilotChatInPlace<cr>",
+                mode = "x",
+                desc = "CopilotChat - Run in-place code",
+            },
+            {
+                "<A-o>",
+                "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
+                desc = "CopilotChat - Fix diagnostic",
+            },
+        },
+    },
 }, {})
+
+if vim.g.installRun then
+    require('lazy').sync({ wait = true })
+end
 
 vim.cmd [[colorscheme onedark]]
 vim.o.hlsearch = true
