@@ -3,7 +3,6 @@ FROM ubuntu:latest
 ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
 
-COPY misc/.gitconfig misc/.* /root/
 RUN apt update && \
     apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip
 
