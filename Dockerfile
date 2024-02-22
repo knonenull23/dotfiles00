@@ -19,8 +19,8 @@ COPY vim/init.lua /root/.config/nvim/init.lua
 RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     echo "Installing Neovim.."  && \
     apt update && \
-    apt install -y ripgrep curl git build-essential python3 python3-pip unzip pysocks && \
-    python3 -m pip install --user python-dotenv requests pynvim==0.5.0 prompt-toolkit && \
+    apt install -y ripgrep curl git build-essential python3 python3-pip unzip && \
+    python3 -m pip install --user python-dotenv requests pynvim==0.5.0 prompt-toolkit pysocks && \
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage  && \
     chmod u+x nvim.appimage && \
     ./nvim.appimage --appimage-extract && \
