@@ -4,7 +4,7 @@ ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
 
 RUN apt update && \
-    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion && \
+    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion gh && \
     echo ". /etc/bash_completion" >> $HOME/.bashrc && \
     echo "alias tmux='tmux -2'" >> $HOME/.bashrc 
 
