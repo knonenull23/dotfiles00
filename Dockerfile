@@ -4,8 +4,9 @@ ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
 
 RUN apt update && \
-    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo && \
-    echo "alias tmux='tmux -2'" >> $HOME/.bashrc
+    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion && \
+    echo ". /etc/bash_completion" >> $HOME/.bashrc && \
+    echo "alias tmux='tmux -2'" >> $HOME/.bashrc 
 
 RUN if [ "$SKIP_NODEJS" ]; then exit; fi && \
     echo "Installing NodeJS.." && \
@@ -26,4 +27,4 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     rm nvim.appimage && \
     mv squashfs-root /opt/nvim && \
     ln -s /opt/nvim/AppRun /usr/bin/nvim && \
-    if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa"; fi
+    if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa && nvim --headless +UpdateRemotePlugins +qa"; fi
