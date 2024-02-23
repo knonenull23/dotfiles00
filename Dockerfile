@@ -4,9 +4,14 @@ ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
 
 RUN apt update && \
-    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion gh && \
+    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion gh openssh-server && \
     echo ". /etc/bash_completion" >> $HOME/.bashrc && \
-    echo "alias tmux='tmux -2'" >> $HOME/.bashrc 
+    echo "alias tmux='tmux -2'" >> $HOME/.bashrc
+
+RUN if [ "$SKIP_OPENSSH" ]; then exit; fi && \
+    apt install -y openssh-server && \
+    ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N "" && \
+    mkdir /run/sshd
 
 RUN if [ "$SKIP_NODEJS" ]; then exit; fi && \
     echo "Installing NodeJS.." && \
