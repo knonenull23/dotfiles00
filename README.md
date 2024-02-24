@@ -38,7 +38,7 @@ docker build --network=host --build-arg SKIP_NEOVIM=y --progress plain -t dev .
 # Run
 ## With sshd 
 docker run --name dev -d --network=host --restart=always -v workspaces:/root/workspaces dev
-ssh-keygen -b 2048 -t rsa 
+ssh-keygen
 docker cp ~/.ssh/id_rsa.pub dev:/root/.ssh/authorized_keys
 docker exec -it --user root dev chown -R root:root /root/.ssh/authorized_keys
 ssh -p 2222 root@127.0.0.1
