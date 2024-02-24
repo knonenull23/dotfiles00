@@ -258,7 +258,7 @@ require('lazy').setup({
                     }
                 }
 
-		servers['jsonls'] = {}
+                servers['jsonls'] = {}
 
                 if vim.fn.executable 'python' == 1 then
                     servers['pyright'] = {}
@@ -456,6 +456,12 @@ require('lazy').setup({
                 "<A-i>",
                 ":CopilotChatInPlace<cr>",
                 mode = "x",
+                desc = "CopilotChat - Run in-place code",
+            },
+            {
+                "<A-i>",
+                ":CopilotChatInPlace<cr>",
+                mode = "n",
                 desc = "CopilotChat - Run in-place code",
             },
             {
