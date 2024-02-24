@@ -36,4 +36,4 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     ln -s /opt/nvim/AppRun /usr/bin/nvim && \
     if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa && nvim --headless +UpdateRemotePlugins +qa"; fi
 
-CMD ["/usr/sbin/sshd" ,"-D", "-o", "ListenAddress=0.0.0.0", "-o", "PermitRootLogin=yes", "-p", "2222"]
+CMD ["/usr/sbin/sshd" ,"-D", "-o", "ListenAddress=0.0.0.0", "-o", "PermitRootLogin=yes", "-p", "8822"]
