@@ -2,16 +2,18 @@ FROM ubuntu:latest
 
 ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
+ARG SKIP_OPENSSH
 
 RUN apt update && \
-    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion gh openssh-server && \
+    apt install -y tmux curl git iputils-ping dnsutils openssl nmap xclip sudo bash-completion gh && \
     echo ". /etc/bash_completion" >> $HOME/.bashrc && \
     echo "alias tmux='tmux -2'" >> $HOME/.bashrc
 
 RUN if [ "$SKIP_OPENSSH" ]; then exit; fi && \
     apt install -y openssh-server && \
     ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N "" && \
-    mkdir /run/sshd
+    mkdir /run/sshd && \
+    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 RUN if [ "$SKIP_NODEJS" ]; then exit; fi && \
     echo "Installing NodeJS.." && \
@@ -33,3 +35,5 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     mv squashfs-root /opt/nvim && \
     ln -s /opt/nvim/AppRun /usr/bin/nvim && \
     if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa && nvim --headless +UpdateRemotePlugins +qa"; fi
+
+CMD ["/usr/sbin/sshd" ,"-D", "-o", "ListenAddress=0.0.0.0", "-o", "PermitRootLogin=yes", "-p", "2222"]

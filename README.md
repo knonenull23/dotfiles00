@@ -33,8 +33,15 @@ cat vscode/extensions | xargs -I{} code --install-extension {}
 docker build --progress plain -t dev .
 
 # Skip certain modules
-docker build --build-arg SKIP_NEOVIM=y --progress plain -t dev .
+docker build --network=host --build-arg SKIP_NEOVIM=y --progress plain -t dev .
 
 # Run
+## With sshd 
+docker run --name dev -d --network=host --restart=always -v workspaces:/root/workspaces dev
+docker cp ~/.ssh/id_rsa.pub dev:/root/.ssh/authorized_keys
+docker exec -it --user root dev chown -R root:root /root/.ssh/authorized_keys
+ssh -p 2222 root@127.0.0.1
+
+## Without sshd
 docker run --name dev -it -d --network=host --restart=always -v workspaces:/root/workspaces dev bash
 ```
