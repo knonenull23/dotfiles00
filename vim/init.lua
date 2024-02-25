@@ -3,6 +3,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = { "*" },
+})
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 vim.g.installRun = false
 if not vim.loop.fs_stat(lazypath) then
@@ -456,12 +462,6 @@ require('lazy').setup({
                 "<A-i>",
                 ":CopilotChatInPlace<cr>",
                 mode = "x",
-                desc = "CopilotChat - Run in-place code",
-            },
-            {
-                "<A-i>",
-                ":CopilotChatInPlace<cr>",
-                mode = "n",
                 desc = "CopilotChat - Run in-place code",
             },
             {
