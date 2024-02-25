@@ -11,7 +11,7 @@ RUN apt update && \
     echo "alias tmux='tmux -2'" >> $HOME/.bashrc
 
 COPY misc/authorized_keys /root/.ssh/authorized_keys 
-RUN chmod 700 /root/.ssh/authorized_keys
+RUN chmod 600 /root/.ssh/authorized_keys
 RUN if [ "$SKIP_OPENSSH" ]; then exit; fi && \
     apt install -y openssh-server && \
     ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N "" && \
