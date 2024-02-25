@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ARG SSHD_PORT=8822
+ENV SSHD_PORT=8822
 ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
 ARG SKIP_OPENSSH
@@ -37,4 +37,4 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     ln -s /opt/nvim/AppRun /usr/bin/nvim && \
     if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa && nvim --headless +UpdateRemotePlugins +qa"; fi
 
-CMD ["/usr/sbin/sshd" ,"-D", "-o", "ListenAddress=0.0.0.0", "-o", "PermitRootLogin=yes", "-p", "$SSHD_PORT"]
+CMD ["bash", "-c", "/usr/sbin/sshd -D -o ListenAddress=0.0.0.0 -o PermitRootLogin=yes -p ${SSHD_PORT}"]
