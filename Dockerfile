@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+ARG SSHD_PORT=8822
 ARG SKIP_NODEJS
 ARG SKIP_NEOVIM
 ARG SKIP_OPENSSH
@@ -9,11 +10,11 @@ RUN apt update && \
     echo ". /etc/bash_completion" >> $HOME/.bashrc && \
     echo "alias tmux='tmux -2'" >> $HOME/.bashrc
 
+COPY misc/authorized_keys /root/.ssh/authorized_keys
 RUN if [ "$SKIP_OPENSSH" ]; then exit; fi && \
     apt install -y openssh-server && \
     ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N "" && \
-    mkdir /run/sshd && \
-    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+    mkdir /run/sshd
 
 RUN if [ "$SKIP_NODEJS" ]; then exit; fi && \
     echo "Installing NodeJS.." && \
@@ -36,4 +37,4 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
     ln -s /opt/nvim/AppRun /usr/bin/nvim && \
     if [ "$SKIP_NODEJS" ]; then nvim --headless "+Lazy! sync" +qa; else /bin/bash -c ". /root/.nvm/nvm.sh && nvim +'LspInstall tsserver bashls yamlls pyright lua_ls jsonls' +qa && nvim --headless +UpdateRemotePlugins +qa"; fi
 
-CMD ["/usr/sbin/sshd" ,"-D", "-o", "ListenAddress=0.0.0.0", "-o", "PermitRootLogin=yes", "-p", "8822"]
+CMD ["/usr/sbin/sshd" ,"-D", "-o", "ListenAddress=0.0.0.0", "-o", "PermitRootLogin=yes", "-p", "$SSHD_PORT"]
