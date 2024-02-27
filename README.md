@@ -37,7 +37,7 @@ docker build --network=host --build-arg SKIP_NEOVIM=y --progress plain -t dev .
 
 # Run
 ## With sshd 
-docker run --name dev -d --network=host --restart=always -v workspaces:/root/workspaces dev
+docker run --cap-add AUDIT_WRITE --name dev -d --network=host --restart=always -v workspaces:/root/workspaces dev
 ssh-keygen
 docker cp ~/.ssh/id_rsa.pub dev:/root/.ssh/authorized_keys
 docker exec -it --user root dev chown -R root:root /root/.ssh/authorized_keys
