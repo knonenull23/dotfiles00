@@ -1,0 +1,13 @@
+diff --git a/Dockerfile b/Dockerfile
+index 9310fc6..c21bf5b 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -30,7 +30,7 @@ RUN if [ "$SKIP_NEOVIM" ]; then exit; fi && \
+     apt update && \
+     apt install -y ripgrep curl git build-essential python3 python3-pip unzip && \
+     python3 -m pip install --user python-dotenv requests pynvim==0.5.0 prompt-toolkit pysocks && \
+-    curl -L --output nvim.appimage https://github.com/neovim/neovim/releases/latest/download/nvim.appimage  && \
++    curl -L --output nvim.appimage https://github.com/matsuu/neovim-aarch64-appimage/releases/download/v0.9.4/nvim-v0.9.4-aarch64.appimage && \
+     chmod u+x nvim.appimage && \
+     ./nvim.appimage --appimage-extract && \
+     rm nvim.appimage && \
