@@ -461,6 +461,11 @@ require('lazy').setup({
             {
                 "<A-i>",
                 ":CopilotChatInPlace<cr>",
+                desc = "CopilotChat - Run in-place code",
+            },
+            {
+                "<A-i>",
+                ":CopilotChatInPlace<cr>",
                 mode = "x",
                 desc = "CopilotChat - Run in-place code",
             },
