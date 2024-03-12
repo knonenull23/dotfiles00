@@ -136,6 +136,8 @@ require('lazy').setup({
                 { desc = '[S]earch Workspace Symbols' })
             vim.keymap.set('n', '<A-h>', require('telescope.builtin').diagnostics,
                 { desc = '[S]earch [D]iagnostics' })
+            vim.keymap.set('n', '<A-m>', require('telescope.builtin').resume,
+                { desc = 'Resume previous Telescope' })
         end
     },
     {
