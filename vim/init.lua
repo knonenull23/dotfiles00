@@ -136,7 +136,7 @@ require('lazy').setup({
                 { desc = '[S]earch Workspace Symbols' })
             vim.keymap.set('n', '<A-h>', require('telescope.builtin').diagnostics,
                 { desc = '[S]earch [D]iagnostics' })
-            vim.keymap.set('n', '<A-m>', require('telescope.builtin').resume,
+            vim.keymap.set('n', '<A-`>', require('telescope.builtin').resume,
                 { desc = 'Resume previous Telescope' })
         end
     },
@@ -538,7 +538,7 @@ vim.keymap.set('t', '<A-3>', '<C-\\><C-n>3gt', {})
 vim.keymap.set('n', '<A-[>', '<CMD>diffget LOCAL<CR>', {})
 vim.keymap.set('n', '<A-]>', '<CMD>diffget BASE<CR>', {})
 vim.keymap.set('n', '<A-\\>', '<CMD>diffget REMOTE<CR>', {})
-vim.keymap.set('n', '<A-`>', ':%s/<c-r>+/<c-r>+/gc<c-f>$F/i', {})
+vim.keymap.set('n', '<A-m>', ':%s/<c-r>+/<c-r>+/gc<c-f>$F/i', {})
 
 -- useful CLI
 -- delete branches except currently checked out: git branch -D (git branch --list --format "%(refname:short)")
